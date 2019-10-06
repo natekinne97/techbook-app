@@ -1,0 +1,21 @@
+/* all general classes used throughout multiple components will go here */
+*{
+    box-sizing: border-box;
+}
+/* gen form is for making the basic styling for all the forms. */
+.gen-form{
+	text-align: center;
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items:  center;
+	margin: 0 auto;
+}
+
+a{
+	text-decoration: none;
+}
+
+.red{
+	color: red;
+}

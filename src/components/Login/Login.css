@@ -1,0 +1,26 @@
+.login-form button{
+	width: 30%;
+	margin-top: 2%;
+}
+
+.login{
+	text-align: center;
+}
+
+.login-form input{
+	width: 87%;
+}
+
+.login-form{
+	margin-top: 4%;
+	border: 1px solid black;
+}
+
+
+/* tablet and higher */
+@media only screen and (min-width: 768px){
+	.login-form input{
+	width: auto;
+	}
+}
+

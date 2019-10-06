@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Review form component renders the UI as expected 1`] = `
+<div
+  className="create-account"
+>
+  <header>
+    Create Account
+  </header>
+  <form
+    className="account-form gen-form"
+    onSubmit={[Function]}
+  >
+    <label
+      htmlFor="username"
+    >
+      Username
+    </label>
+    <input
+      id="username"
+      name="user_name"
+      required={true}
+      type="text"
+    />
+    <label
+      htmlFor="email"
+    >
+      Email
+    </label>
+    <input
+      name="email"
+      required={true}
+      type="email"
+    />
+    <label
+      htmlFor="first_name"
+    >
+      First name
+    </label>
+    <input
+      name="first_name"
+      required={true}
+      type="text"
+    />
+    <label
+      htmlFor="last_name"
+    >
+      Last name
+    </label>
+    <input
+      name="last_name"
+      type="text"
+    />
+    <label
+      htmlFor="password"
+    >
+      Password
+    </label>
+    <input
+      id="password"
+      name="password"
+      required={true}
+      type="password"
+    />
+    <label
+      htmlFor="repeat-password"
+    >
+      Repeat password
+    </label>
+    <input
+      id="repeat-password"
+      name="repeat_password"
+      onChange={[Function]}
+      required={true}
+      type="password"
+    />
+    <button
+      type="submit"
+    >
+      Sign Up
+    </button>
+  </form>
+</div>
+`;
+
+exports[`Review form component renders the UI as expected with no unreads 1`] = `
+<div
+  className="create-account"
+>
+  <header>
+    Create Account
+  </header>
+  <form
+    className="account-form gen-form"
+    onSubmit={[Function]}
+  >
+    <label
+      htmlFor="username"
+    >
+      Username
+    </label>
+    <input
+      id="username"
+      name="user_name"
+      required={true}
+      type="text"
+    />
+    <label
+      htmlFor="email"
+    >
+      Email
+    </label>
+    <input
+      name="email"
+      required={true}
+      type="email"
+    />
+    <label
+      htmlFor="first_name"
+    >
+      First name
+    </label>
+    <input
+      name="first_name"
+      required={true}
+      type="text"
+    />
+    <label
+      htmlFor="last_name"
+    >
+      Last name
+    </label>
+    <input
+      name="last_name"
+      type="text"
+    />
+    <label
+      htmlFor="password"
+    >
+      Password
+    </label>
+    <input
+      id="password"
+      name="password"
+      required={true}
+      type="password"
+    />
+    <label
+      htmlFor="repeat-password"
+    >
+      Repeat password
+    </label>
+    <input
+      id="repeat-password"
+      name="repeat_password"
+      onChange={[Function]}
+      required={true}
+      type="password"
+    />
+    <button
+      type="submit"
+    >
+      Sign Up
+    </button>
+  </form>
+</div>
+`;

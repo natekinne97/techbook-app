@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Review form component renders the UI as expected 1`] = `
+<div
+  className="resest-password"
+>
+  <header>
+    <h1 />
+  </header>
+  <form
+    className="gen-form"
+    onSubmit={[Function]}
+  >
+    <label>
+      New password
+    </label>
+    <input
+      id="password_reset"
+      name="password"
+      required={true}
+      type="password"
+    />
+    <label>
+      Repeat password
+    </label>
+    <input
+      id="pass_repeat"
+      name="repeat_pass"
+      onChange={[Function]}
+      type="password"
+    />
+    <button
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;
+
+exports[`Review form component renders the UI as expected with no unreads 1`] = `
+<div
+  className="resest-password"
+>
+  <header>
+    <h1 />
+  </header>
+  <form
+    className="gen-form"
+    onSubmit={[Function]}
+  >
+    <label>
+      New password
+    </label>
+    <input
+      id="password_reset"
+      name="password"
+      required={true}
+      type="password"
+    />
+    <label>
+      Repeat password
+    </label>
+    <input
+      id="pass_repeat"
+      name="repeat_pass"
+      onChange={[Function]}
+      type="password"
+    />
+    <button
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;
