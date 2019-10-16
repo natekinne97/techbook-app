@@ -1,0 +1,108 @@
+/* 
+top menu includes search bar and header TB
+*/
+.top-menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* the link to home and logo */
+.top-menu a{
+    font-size: 40px;
+}
+/* burger menu */
+.svg-inline--fa.fa-w-14 {
+    width: 0.875em;
+    font-size: 45px;
+}
+
+/* 
+    all of the menu items
+    for now change when done with mobile
+*/
+.mobile-menu-items{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    width: 100%;
+}
+/* the menu items individually */
+.mobile-menu-items li{
+    font-size: 49px;
+    padding-bottom: 3%;
+    margin-bottom: 2%;
+    border-radius: 3%;
+    width: 100%;
+    background: rgb(0, 0, 0, 0.1);
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 
+    0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+}
+
+/* remove the link decoration */
+.mobile-menu-items a{
+    text-decoration: none;
+    color: black;
+    width: 100%;
+}
+
+/* a seperate menu for the desktop with more features easily displayed */
+.desktop-menu-items{
+    display: none;
+}
+
+.desktop-menu-items a{
+    text-decoration: none;
+    color: black;
+    width: 100%;
+}
+
+
+/* hidden class for hiding the menu items */
+.hidden{
+    display: none;
+}
+
+/* links hidden on mobile */
+.hidden-mobile{
+    display: none;
+}
+
+@media screen and (min-width: 1024px){
+    /* change the menu style so it can be used for desktops */
+    .mobile-menu-items{
+        width: 6.3em;
+        position: absolute;
+        right: 4px;
+        text-align: end;
+    }
+    /* remove the link stylings */
+    .mobile-menu-items li{
+        background: none;
+        box-shadow: none;
+        border: none;
+        font-size: 1em;
+        border-bottom: 1px solid;
+    }
+    /* create a sidebar */
+    .desktop-menu-items{
+        position: fixed;
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .desktop-menu-items li{
+        margin-bottom: .5em;
+    }
+
+    /* hide features from burger to put in sidebar */
+    .hidden-desktop{
+        display: none;
+    }
+}

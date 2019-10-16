@@ -1,0 +1,24 @@
+.intro{
+    border: 1px solid black;
+    margin-top: 15%;
+    background: gainsboro;
+}
+
+.login-container{
+    border: 1px solid black;
+    margin-top: 10%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#signup{
+    text-decoration: none;
+    color: black;
+    background: palegreen;
+    width: 4em;
+    border-radius: 8px;
+    margin: 1em;
+}

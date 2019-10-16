@@ -1,0 +1,58 @@
+/* container holding all of the posts */
+.post-container{
+        background: rgb(0, 0, 0, 0.2);
+}
+
+
+/*post itself*/
+.post{
+    text-align: center;
+    width: 100%;
+    background: white;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 3%;
+}
+
+
+
+/*post meta*/
+.post-meta{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 21px;
+    height: 4vh;
+}
+
+.post-text{
+    font-size: 30px;
+}
+
+
+.stats{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 21px;
+    border-bottom: 1px solid black;
+}
+
+.rating{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 25px;
+    height: 6vh;
+    border-bottom: 1px solid black;
+}
+
+@media screen and (min-width: 1024px){
+    .post-container{
+        width: 79vh;
+        display: block;
+        margin: 0 auto;
+    }
+}

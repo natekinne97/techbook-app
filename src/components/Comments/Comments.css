@@ -1,0 +1,13 @@
+.comments-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.comment{
+    width: 60%;
+    background: rgb(0, 0, 0, 0.2);
+    margin-bottom: 1%;
+    border-radius: 10px;
+}

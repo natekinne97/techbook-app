@@ -1,0 +1,16 @@
+
+.group-container{
+    text-align: center;
+}
+
+/* form for the new group */
+.group-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.group-form input{
+    margin-bottom: 1em;
+}
