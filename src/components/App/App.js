@@ -1,15 +1,22 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-// import context
+
 // Components
 import LoginPage from '../../routes/LoginPage'
 import CreatePage from '../../routes/CreatePage';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import Reset from '../Reset/Reset';
 
+import Menu from '../Menu/Menu';
+import PostFeed from '../PostFeed/PostFeed';
+import Homepage from '../Homepage/Homepage';
+import Account from '../Account/Account';
+// import Signup from '../Signup/Signup';
+import CreateGroup from '../CreateGroup/CreateGroup';
+
 // private route
-// import PrivateRoute from '../../routes/private';
+import PrivateRoute from '../../routes/private';
 
 // idle and refresh
 import TokenService from '../../services/token-services'
@@ -94,11 +101,43 @@ class App extends React.Component {
       <div>
         <nav>
          {/* menu goes here */}
+         <Menu/>
         </nav>
         <main>
           <Switch>
             {/* homepage */}
-           
+            {/* 
+            landing page 
+            and login
+          */}
+            <Route
+              exact
+              path="/"
+              component={Homepage}
+            />
+
+            {/* <Route
+              path="/signup"
+              component={Signup}
+            /> */}
+
+            {/* logged in home page */}
+            <PrivateRoute
+              path="/home"
+              component={PostFeed}
+            />
+
+            {/* account info and edit */}
+            <PrivateRoute
+              path="/account"
+              component={Account}
+            />
+
+            {/* create a new group */}
+            <PrivateRoute
+              path="/make-group"
+              component={CreateGroup}
+            />
            
             {/* login route */}
             <Route

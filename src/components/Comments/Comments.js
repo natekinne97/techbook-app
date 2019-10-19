@@ -1,8 +1,10 @@
 import React from 'react';
-import STORE from '../../STORE';
 
 import CreateComment from '../CreateComment/CreateComment';
-
+import PostContext from '../../Context/Context';
+import Error from '../Error/Error';
+import TokenService from '../../services/token-services'; 
+import Config from '../../config';
 import './Comments.css'
 
 
@@ -11,30 +13,74 @@ import './Comments.css'
 // and only for the clicked on posts
 // the comments will be updated for this post in the context
 class Comments extends React.Component{
+    static contextType = PostContext;
 
-    getComments = ()=>{
-        let post = STORE.find(post=>{
-            return post.id === this.props.postId;
-        });
-        console.log(post);
-        let comments = post.comments.map(comments=>{
-            return(
-                <div key={comments.id} className="comment">
-                    <p>{comments.user}</p>
-                    <p>{comments.text}</p>
-                </div>
-            );
-        })
-
-        return comments;
+    static defaultProps = {
+        postId: ''
     }
+
+    // get comments from api
+    loadComments = ()=>
+            fetch(`${Config.API_ENDPOINT}/posts/comments/${this.props.postId}`, {
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `bearer ${TokenService.getAuthToken()}`,
+                }
+            })
+                .then(res => (res.ok ? res : Promise.reject(res)))
+                .then(res => res.json());
+
+
+
+    componentDidMount(){
+     
+        fetch(`${Config.API_ENDPOINT}/posts/comments/${this.props.postId}`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            }
+        })
+            .then(res => (res.ok ? res : Promise.reject(res)))
+            .then(res => res.json())
+            .then(res => this.context.setComments(res, false))
+            .catch(err=> this.context.setError(err));
+
+    }
+
+    // render all comments
+    renderComments = ()=>{
+        console.log('rendering comments')
+        return (
+            <>
+                {this.context.comments.map(comment => (
+                    
+                    <div key={comment.id} className="comment">
+                        <p>{comment.user}</p>
+                        <p>{comment.comment}</p>
+                    </div>
+                ))}
+            </>
+        );
+    }
+
 
     render(){
        
         return(
             <div className="comments-container">
                 <button>Load more comments...</button>
-               {this.getComments()}
+                {/* render error message    */}
+                {this.context.Error 
+                ? <Error err={this.context.error}/>
+                : null}
+
+                    
+                {!this.context.isLoading
+                ? this.renderComments()
+                : <h1>Loading...</h1>}
+                
 
                 <CreateComment postId={this.props.postId}/>
             </div>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Login.css';
 import authApi from '../../auth-service/auth-service';
 import TokenService from '../../services/token-services';
@@ -25,7 +24,7 @@ class Login extends React.Component {
             .then(res => {
                 username.value = ''
                 password.value = ''
-
+                console.log('loged in');
                 // save token
                 TokenService.saveAuthToken(res.authToken)
                 this.props.onLoginSuccess()
@@ -45,8 +44,7 @@ class Login extends React.Component {
                     ? <p className="red">{this.state.error}</p>
                     : null}
 
-                <form className="login-form gen-form" onSubmit={this.handleSubmit}>
-
+                <form className="login-form" onSubmit={this.handleSubmit}>
                     <label htmlFor="username">Username:</label>
                     <input type="text" name="username" required />
 
@@ -54,7 +52,6 @@ class Login extends React.Component {
                     <input type="password" name="password" required />
 
                     <button type="submit">Login</button>
-                    <Link to='/forgot-password'>Forgot password?</Link>
                 </form>
 
             </div>

@@ -9,6 +9,21 @@ import Login from '../Login/Login';
 // of the site. the user must login to get any features at all.
 class Homepage extends React.Component{
 
+    
+    static defaultProps = {
+        location: {},
+        history: {
+            push: () => { },
+        },
+    }
+
+    handleLoginSuccess = () => {
+        const { history } = this.props
+        history.push('/home');
+    }
+
+
+
     render(){
         return(
             <div className="homepage">
@@ -23,7 +38,7 @@ class Homepage extends React.Component{
                
                 <div className="login-container">
                     <h3>Login</h3>
-                    <Login/>
+                    <Login onLoginSuccess={this.handleLoginSuccess}/>
                     <Link to="/forgot">
                         Forgot password?
                     </Link>
