@@ -14,7 +14,7 @@ export default class LoginPage extends Component {
         const { history } = this.props
         // check if last loaded page was login
         if (localStorage.lastUrl === '/login') {
-            history.push('/')
+            history.push('/home')
         } else {
             history.push(localStorage.lastUrl);
         }

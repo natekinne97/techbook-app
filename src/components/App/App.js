@@ -14,6 +14,7 @@ import Homepage from '../Homepage/Homepage';
 import Account from '../Account/Account';
 // import Signup from '../Signup/Signup';
 import CreateGroup from '../CreateGroup/CreateGroup';
+import EditProfile from '../EditProfile/EditProfile';
 
 // private route
 import PrivateRoute from '../../routes/private';
@@ -148,6 +149,11 @@ class App extends React.Component {
             <Route
               path="/signup"
               component={CreatePage}
+            />
+
+            <Route 
+              path="/edit-profile"
+              component={EditProfile}
             />
 
             {/* forgot password */}

@@ -1,0 +1,16 @@
+.account-edit{
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
+    border: 1px solid black;
+    width: 20em;
+}
+
+.edit-account-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+
+}

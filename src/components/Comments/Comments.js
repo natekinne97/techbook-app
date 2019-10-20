@@ -19,20 +19,6 @@ class Comments extends React.Component{
         postId: ''
     }
 
-    // get comments from api
-    loadComments = ()=>
-            fetch(`${Config.API_ENDPOINT}/posts/comments/${this.props.postId}`, {
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    'authorization': `bearer ${TokenService.getAuthToken()}`,
-                }
-            })
-                .then(res => (res.ok ? res : Promise.reject(res)))
-                .then(res => res.json());
-
-
-
     componentDidMount(){
      
         fetch(`${Config.API_ENDPOINT}/posts/comments/${this.props.postId}`, {
