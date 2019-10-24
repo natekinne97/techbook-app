@@ -31,7 +31,7 @@ class CreateComment extends React.Component{
         }
 
         try {
-            const fetchResponse = await fetch(`${Config.API_ENDPOINT}/posts/comment`, settings);
+            const fetchResponse = await fetch(`${Config.API_ENDPOINT}/comments/`, settings);
             const data = await fetchResponse.json();
             console.log(data, 'data');
             this.context.addComment(data);

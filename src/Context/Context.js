@@ -6,6 +6,7 @@ const PostContext = React.createContext({
     comments: [],
     isLoading: true,
     error: null,
+    searching: null,
     // set data
     setPosts: ()=>{},
     setComments: ()=>{},
@@ -13,6 +14,10 @@ const PostContext = React.createContext({
     // add data
     addComment: ()=>{},
     addPost: ()=>{},
+
+    // handle the display of the search results
+    setSearch: ()=>{},
+    clearSearch: ()=>{},
 
     // error handling
     setError: ()=>{},
@@ -29,7 +34,7 @@ export class PostProvider extends React.Component{
         posts: [],
         comments: [],
         isLoading: true,
-
+        searching: null,
         error: null,
     }
 
@@ -66,6 +71,18 @@ export class PostProvider extends React.Component{
             comment
         ])
     }
+    // set search hiding the about bar when a search is made
+    setSearch = ()=>{
+        this.setState({
+            searching: true
+        })
+    }
+
+    clearSearch = ()=>{
+        this.setState({
+            searching: false
+        })
+    }
 
     setError = error=>{
         
@@ -86,7 +103,7 @@ export class PostProvider extends React.Component{
             posts: this.state.posts,
             comments: this.state.comments,
             error: this.state.error,
-
+            search: this.state.searching,
             // set data
             setPosts: this.setPosts,
             setComments: this.setComments,
@@ -95,11 +112,15 @@ export class PostProvider extends React.Component{
             addPost: this.addPost,
             addComment: this.addComments,
 
+            // search handling
+            setSearch: this.setSearch,
+
             // error handling
             setError: this.setError,
 
             // clear error
-            clearError: this.clearError
+            clearError: this.clearError,
+            clearSearch: this.clearSearch
 
         }
         return(

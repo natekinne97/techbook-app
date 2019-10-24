@@ -24,6 +24,30 @@ class Posts extends React.Component{
     // upvote.
     // the server will also send back an updated comment number.
 
+    vote = async vote => {
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+            body: JSON.stringify(vote)
+        }
+
+        try {
+            const fetchResponse = await fetch(`${Config.API_ENDPOINT}/posts/votes`, settings);
+            const data = await fetchResponse.json();
+            
+            if(data[0].count){
+                this.setState({
+                    votes: data[0].count
+                })
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     state={
         votes: 0,
         posts: [],
@@ -35,16 +59,20 @@ class Posts extends React.Component{
 
 
     // fake data to show the static users the basics
-    upVote = position =>{
+    upVote = (position, id) =>{
+        
         if(position === 'up'){
-            this.setState({
-                votes: this.state.votes+1
-            })
-
+            const newVote = {
+                vote: 1,
+                post_id: id
+            }
+            this.vote(newVote);
         }else if(position === 'down'){
-            this.setState({
-                votes: this.state.votes-1
-            })
+            const newVote = {
+                vote: -1,
+                post_id: id
+            }
+            this.vote(newVote);
         }else{
             console.log('Must be a string up or down')
         }
@@ -70,6 +98,7 @@ class Posts extends React.Component{
     }
     // get the data
     componentDidMount(){
+        console.log(this.state.votes, 'current votes');
         try{
             // fetch
             fetch(`${Config.API_ENDPOINT}/posts/`, {
@@ -81,7 +110,9 @@ class Posts extends React.Component{
             })
                 .then(res => (res.ok ? res : Promise.reject(res)))
                 .then(res => res.json())
-                .then(res=> this.context.setPosts(res, false));
+                .then(res=> {
+                    this.context.setPosts(res, false)
+                });
 
         
         }catch(e){
@@ -103,10 +134,19 @@ class Posts extends React.Component{
                             <p>{post.date_created}</p>
                         </div>
                         <p className="post-text">{post.post}</p>
+                        <div className="stats">
+                            <span>
+                            <FontAwesomeIcon icon={faThumbsUp} />
+                                {this.state.votes
+                                ? this.state.votes
+                                : post.sum}
+                               </span>
+                            <span>Comments</span>
+                        </div>
                         <div className="rating">
 
-                            <FontAwesomeIcon icon={faThumbsUp} value='1' onClick={e => this.upVote('up')} />
-                            <FontAwesomeIcon icon={faThumbsDown} value='-1' onClick={e => this.upVote('down')} />
+                            <FontAwesomeIcon icon={faThumbsUp} value='1' onClick={e => this.upVote('up', post.id)} />
+                            <FontAwesomeIcon icon={faThumbsDown} value='-1' onClick={e => this.upVote('down', post.id)} />
                             <p onClick={e => this.commentsClicked(post.id)}>Comments</p>
 
                         </div>

@@ -5,6 +5,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import TokenService from '../../services/token-services';
 import IdleService from '../../services/idle-services';
 import Group from '../Group/Group';
+import Search from '../Search/Search';
 import './Menu.css';
 
 // the menu. certian part will be displayed when logged in and when not
@@ -99,9 +100,7 @@ class Menu extends React.Component{
                         {/* <Link>TechBook</Link> */}
                     </header>
                     {/* search bar */}
-                    <form>
-                        <input className="input-field" type="text" name="search" value="search" />
-                    </form>
+                    <Search />
                     {/* burger menu */}
                     <FontAwesomeIcon icon={faBars} onClick={this.burgerClicked}/>
 
