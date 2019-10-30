@@ -44,6 +44,7 @@ class Account extends React.Component{
             
             <div className="basic">
                 <div className="edit-button">
+                    {/* check if user owns the account */}
                     {!this.props.user_id
                         ? <Link to="/edit-profile">
                             <FontAwesomeIcon icon={faPencilAlt} />

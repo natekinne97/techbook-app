@@ -7,9 +7,14 @@ const PostContext = React.createContext({
     isLoading: true,
     error: null,
     searching: null,
+    groups: [],
+    people: [],
+
     // set data
     setPosts: ()=>{},
     setComments: ()=>{},
+    setPeople: ()=>{},
+    setGroups: ()=>{},
 
     // add data
     addComment: ()=>{},
@@ -35,6 +40,8 @@ export class PostProvider extends React.Component{
         comments: [],
         isLoading: true,
         searching: null,
+        groups: [],
+        people: [],
         error: null,
     }
 
@@ -71,6 +78,21 @@ export class PostProvider extends React.Component{
             comment
         ])
     }
+    // set groups to be displayed as a search result
+    setGroups = group =>{
+        this.setState({
+            groups: group
+        })
+    }
+
+    // set people 
+    setPeople = people =>{
+        this.setState({
+            people: people
+        })
+    }
+
+
     // set search hiding the about bar when a search is made
     setSearch = ()=>{
         this.setState({
@@ -80,7 +102,7 @@ export class PostProvider extends React.Component{
 
     clearSearch = ()=>{
         this.setState({
-            searching: false
+            searching: null
         })
     }
 
@@ -104,6 +126,8 @@ export class PostProvider extends React.Component{
             comments: this.state.comments,
             error: this.state.error,
             search: this.state.searching,
+            people: this.state.people,
+            groups: this.state.groups,
             // set data
             setPosts: this.setPosts,
             setComments: this.setComments,
@@ -111,6 +135,8 @@ export class PostProvider extends React.Component{
             // add the data. from added posts/comments
             addPost: this.addPost,
             addComment: this.addComments,
+            setPeople: this.setPeople,
+            setGroups: this.setGroups,
 
             // search handling
             setSearch: this.setSearch,

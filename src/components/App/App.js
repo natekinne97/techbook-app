@@ -15,6 +15,7 @@ import Account from '../Account/Account';
 // import Signup from '../Signup/Signup';
 import CreateGroup from '../CreateGroup/CreateGroup';
 import EditProfile from '../EditProfile/EditProfile';
+import GroupsPage from '../GroupsPage/GroupsPage';
 
 // private route
 import PrivateRoute from '../../routes/private';
@@ -138,6 +139,11 @@ class App extends React.Component {
             <PrivateRoute
               path="/make-group"
               component={CreateGroup}
+            />
+            {/* look at group */}
+            <PrivateRoute
+              path="/group/:id"
+              component={GroupsPage}
             />
            
             {/* login route */}

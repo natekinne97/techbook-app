@@ -7,6 +7,8 @@ import Config from '../../config';
 class Search extends React.Component{
     static contextType = PostContext;
 
+
+    // search with the search term
     search = async searchTerm =>{
         const settings = {
             method: 'POST',
@@ -20,12 +22,14 @@ class Search extends React.Component{
         try {
             const fetchResponse = await fetch(`${Config.API_ENDPOINT}/search/`, settings);
             const data = await fetchResponse.json();
+            console.log('getting search results');
+            console.log(data, 'search results');
 
-            if (data.posts) {
-                console.log('post data');
-                this.context.setPosts(data.posts);
-            }
-
+            this.context.setPosts(data.posts);
+            this.context.setGroups(data.groups);
+            this.context.setPeople(data.people);
+            console.log('finished setting data');
+            
         } catch (e) {
             console.log(e)
         }
@@ -38,14 +42,14 @@ class Search extends React.Component{
         const searchTerm = {
             term: term.value
         }
+        
+        // this shows the search results container.
+        this.context.setSearch();
 
         this.search(searchTerm);
 
     }
 
-    renderResults = ()=>{
-
-    }
 
     render(){
         return(

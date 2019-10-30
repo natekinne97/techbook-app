@@ -1,0 +1,43 @@
+/* all results */
+.search-results{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+     margin-bottom: 1em;
+}
+
+.search-results a{
+    text-decoration: none;
+}
+
+/* search results and x */
+.result-bar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#x{
+    margin-left: .5em;
+    cursor: pointer;
+    color: red;
+}
+
+/* group container */
+.groups-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    width: 24em;
+   
+}
+
+.people-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    width: 24em;
+   
+}
