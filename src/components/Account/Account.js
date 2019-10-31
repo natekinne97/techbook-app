@@ -8,22 +8,44 @@ import Config from '../../config';
 
 import './Account.css';
 
+// next we need to make a route to check the user
+// on mount then we need to check that the id sent is not the current user
+
+
 // this account will be used to make patch requests on the 
 // user to change basic information
 // such as occupation and bio 
 class Account extends React.Component{
-    static defaultProps = {
-        user_id: ''
-    }
-
+    
     state = {
         accountInfo: [],
         error: null
     }
 
     componentDidMount(){
+        let url;
+        // get the location for grabbing the id
+        const { location } = this.props;
+        // pathname: "/account/1"
+        // get the path from the location
+        // extract the id from the pathname
+        const id = location.pathname.match(/(\d+)/);
+        console.log(id[0], 'id');
+        // here we are going to check if the page is being loaded
+        // for the user or a different person.
+        if(Number(id[0]) > 0){
+            console.log('using id')
+            url = `${Config.API_ENDPOINT}/users/profile?profile=${id[0]}`;
+        }else{
+            console.log('current user')
+            // load the users profile
+            url = `${Config.API_ENDPOINT}/users/profile`;
+        }
 
-        fetch(`${Config.API_ENDPOINT}/users/profile`, {
+         
+
+        // get the users profile
+        fetch(url, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',

@@ -27,11 +27,11 @@ class Group extends React.Component{
             }
             const fetchResponse = await fetch(`${Config.API_ENDPOINT}/member/users-groups`, settings);
             const data = await fetchResponse.json();
-            console.log(data, 'data for groups')
+           
             this.setState({
                 groups: data
             })
-            console.log('state set')
+           
         }catch(err){
             this.setState({
                 error: err
@@ -46,7 +46,7 @@ class Group extends React.Component{
 
     renderGroups(){
         if(this.state.groups.length > 0){
-            console.log('working so far');
+            
             return (
                 <>
                     {this.state.groups.map(group=>(

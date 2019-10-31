@@ -37,10 +37,11 @@ class SearchResults extends React.Component{
     renderPeople(){
         // only return if there is content
         if(this.context.people.length > 0){
+            console.log('rendering people')
             return (
                 <div className="people-container">
                     {this.context.people.map(person => (
-                        <Link className="person">
+                        <Link to={`/account/${person.id}`} className="person">
                             {person.name}
                         </Link>
                     ))}

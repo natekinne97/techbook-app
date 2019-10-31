@@ -129,9 +129,16 @@ class App extends React.Component {
               component={PostFeed}
             />
 
-            {/* account info and edit */}
+            {/* account info and edit for personal profile */}
             <PrivateRoute
               path="/account"
+              component={Account}
+            />
+            {/* shows the friends account page
+                their bio, and add them as a friend
+            */}
+            <PrivateRoute
+              path="/account/:id"
               component={Account}
             />
 
