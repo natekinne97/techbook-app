@@ -1,6 +1,7 @@
 import React from 'react';
 import PostFeed from '../PostFeed/PostFeed';
 
+import PostContext from '../../Context/Context';
 import Error from '../Error/Error';
 import TokenService from '../../services/token-services';
 import Config from '../../config';
@@ -12,6 +13,7 @@ import './GroupsPage.css';
 // which chooses to display a button saying whether the person is in the group
 // or not.
 class GroupsPage extends React.Component{
+    static contextType = PostContext;
 
     // get the params
     static defaultProps = {
@@ -23,9 +25,11 @@ class GroupsPage extends React.Component{
         group: [],
         user: [],
         error: null,
-        joined: []
+        joined: [],
+        prev: 0
     }
 
+    // join the group
     joinGroup = async ()=>{
         const settings = {
             method: 'POST',
@@ -45,9 +49,9 @@ class GroupsPage extends React.Component{
         
     }
 
-    // async call to fetch
+    // get the groups information
     getGroup = async () => {
-        console.log(this.props.match.params.id);
+       
         const settings = {
             method: 'GET',
             headers: {
@@ -70,6 +74,29 @@ class GroupsPage extends React.Component{
         }
     }
 
+    // get all posts fro group
+    groupPosts = async () =>{
+       
+        const settings = {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+
+        }
+
+        try{
+            const fetchResponse = await fetch(`${Config.API_ENDPOINT}/posts/?id=${this.props.match.params.id}`, settings);
+            const data = await fetchResponse.json();
+            this.context.setPosts(data);
+        }catch(err){
+            this.setState({
+                error: err
+            })
+        }
+    }
+
     // checks if user is currently in the group
     // if not then show button else hide the button
     checkUser = async () => {
@@ -86,10 +113,15 @@ class GroupsPage extends React.Component{
             const fetchResponse = await fetch(`${Config.API_ENDPOINT}/member/check/${this.props.match.params.id}`, settings);
             const data = await fetchResponse.json();
             console.log(data, 'data');
+            // if the suer isnt in the group.
             if(data.message){
                 this.setState({
                     user: data.message
                 });
+                console.log('user is in this group');
+            }else{
+                // if the user is already in the group
+                console.log('user is not in this group')
             }
            
         } catch (err) {
@@ -101,10 +133,22 @@ class GroupsPage extends React.Component{
 
     // load the group data
     componentDidMount(){
+        
         // get the group data
         this.getGroup();
         this.checkUser();
+        this.groupPosts();
           
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(this.props.match.params.id !== prevProps.match.params.id){
+            console.log('a change is a happening');
+            // get the group data
+            this.getGroup();
+            this.checkUser();
+            this.groupPosts();
+        }
     }
 
     // handles join request.
@@ -119,7 +163,7 @@ class GroupsPage extends React.Component{
 
     // display the name of the group.
     renderGroupName(){
-        
+        console.log(this.props.match.params.id);
         if(this.state.group.name){
             return (
                 <h1>{this.state.group.name}</h1>
@@ -133,20 +177,22 @@ class GroupsPage extends React.Component{
     }
 
     renderAbout(){
-        
+       
         if(this.state.group.about){
+
             return (
                 <div className="about-container">
                     <h3>About</h3>
-                    <p>a group about groups chat</p>
+                   
+                    <p>{this.state.group.about}</p>
 
                     <h3>Who is this group for?</h3>
-                    <p>people</p>
+                    <p>{this.state.group.level}</p>
                     {/* this form adds the user into the group. 
                     in the future you will be able to leave the group.
                 */}
                     <form onSubmit={this.handleSubmit}>
-                        {this.state.user.length > 0
+                        {Number(this.state.user) > 0
                             ? <button>Join</button>
                         : null }
                     </form>
@@ -166,6 +212,7 @@ class GroupsPage extends React.Component{
 
 
     render(){
+        
         return(
             <div className="groups-page">
                 {/* if the user just joined the group welcome them */}

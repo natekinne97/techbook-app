@@ -9,6 +9,10 @@ import Config from '../../config';
 // then displays as a drop down from the menu
 class Group extends React.Component{
 
+    static defaultProps = {
+        show: ''
+    }
+
     state = {
         groups: [],
         error: null
@@ -50,7 +54,7 @@ class Group extends React.Component{
             return (
                 <>
                     {this.state.groups.map(group=>(
-                        <li><Link to={`/group/${group.id}`}>
+                        <li key={group.id}><Link to={`/group/${group.id}`}>
                         {group.group_name}
                         </Link></li>
                     ))}
@@ -63,7 +67,7 @@ class Group extends React.Component{
         return(
             <ul className={this.props.show}>
                 {this.state.error
-                ? <Error err={this.state.error}/>
+                ? <Error err={this.state.error.error}/>
                 : null}
                 {this.renderGroups()}
             </ul>

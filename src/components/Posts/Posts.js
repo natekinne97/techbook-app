@@ -24,6 +24,15 @@ class Posts extends React.Component{
     // upvote.
     // the server will also send back an updated comment number.
 
+    static defaultProps = {
+        location: {},
+        history: {
+            push: () => { },
+        },
+        match: { params: {} },
+    }
+
+   
     vote = async vote => {
         const settings = {
             method: 'POST',
@@ -54,7 +63,8 @@ class Posts extends React.Component{
         // displays comments only for the single post
         showComments:{
 
-        }
+        },
+        currentParam: 0
     }
 
 
@@ -98,7 +108,7 @@ class Posts extends React.Component{
     }
     // get the data
     componentDidMount(){
-        console.log(this.state.votes, 'current votes');
+        
         try{
             // fetch
             fetch(`${Config.API_ENDPOINT}/posts/`, {
@@ -124,7 +134,7 @@ class Posts extends React.Component{
 
 
     testRenderPost = ()=>{
-        console.log(this.context.isLoading);
+        
         return (
             <>
                 {this.context.posts.map(post => (
@@ -165,6 +175,9 @@ class Posts extends React.Component{
    
     // map out the store and put the data into a post div
     renderPosts(){
+
+       
+
        let posts = STORE.map(post=> <div id={post.id} key={post.id} className="post">
           
             <div className="post-meta">
@@ -200,7 +213,7 @@ class Posts extends React.Component{
     
 
     render(){
-        
+       
         return(
             <div className="post-container">
                 {/* render error */}

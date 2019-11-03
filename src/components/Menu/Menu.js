@@ -13,7 +13,9 @@ import './Menu.css';
 class Menu extends React.Component{
 
     state = {
+        // hiding the burger menu   
         burger: 'hidden',
+        // group is for the sidebar
         group: 'hidden'
     }
 

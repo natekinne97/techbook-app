@@ -16,6 +16,15 @@ import './Account.css';
 // user to change basic information
 // such as occupation and bio 
 class Account extends React.Component{
+
+    static defaultProps = {
+        location: {},
+        history: {
+            push: () => { },
+        },
+        match: { params: {} },
+        prev: ''
+    }
     
     state = {
         accountInfo: [],
@@ -24,18 +33,28 @@ class Account extends React.Component{
 
     componentDidMount(){
         let url;
-        // get the location for grabbing the id
-        const { location } = this.props;
-        // pathname: "/account/1"
-        // get the path from the location
-        // extract the id from the pathname
-        const id = location.pathname.match(/(\d+)/);
-        console.log(id[0], 'id');
-        // here we are going to check if the page is being loaded
-        // for the user or a different person.
-        if(Number(id[0]) > 0){
+        try{
+            if (this.props.match.params.id){
+                const id = this.props.match.params.id;
+                console.log(id);
+                this.setState({
+                    pev: id
+                })
+            }
+        }catch(err){
+            console.log(err);
+        }
+        let id;
+        if (this.props.match.params.id) {
+            id = this.props.match.params.id;
+            console.log(id);
+            
+        }
+       
+        // check if we are looking at the current users account or a different one
+        if(Number(id) > 0){
             console.log('using id')
-            url = `${Config.API_ENDPOINT}/users/profile?profile=${id[0]}`;
+            url = `${Config.API_ENDPOINT}/users/profile?profile=${id}`;
         }else{
             console.log('current user')
             // load the users profile
@@ -61,7 +80,6 @@ class Account extends React.Component{
     }
 
     renderAccountInfo(){
-       
         return (
             
             <div className="basic">
@@ -80,18 +98,18 @@ class Account extends React.Component{
                 <p>{this.state.accountInfo.full_name}</p>
 
                 <h4>Bio</h4>
-                <p> 
-                  {!this.state.accountInfo.bio
-                    ? <p>Add a bio</p>
-                    : this.state.accountInfo.bio}
                 
-                </p>
+               {!this.state.accountInfo.bio
+                ? <p>Add a bio</p>
+                : this.state.accountInfo.bio}
+                
+               
                 <h3>Occupation</h3>
-                <p>
-                    {!this.state.accountInfo.occupation
-                        ? <p>Add a bio</p>
-                        : this.state.accountInfo.occupation}
-                </p>
+                
+                {!this.state.accountInfo.occupation
+                ? <p>Add a bio</p>
+                : this.state.accountInfo.occupation}
+                
             </div>    
            
         );
@@ -100,7 +118,8 @@ class Account extends React.Component{
     }
 
     render(){
-        
+        console.log('hello i am working');
+        // console.log(this.props.match.params.id);
         return(
             <div className="account">
                 {this.renderAccountInfo()}
