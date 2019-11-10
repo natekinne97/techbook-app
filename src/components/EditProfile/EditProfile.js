@@ -63,10 +63,9 @@ class EditProfile extends React.Component{
         try {
             const fetchResponse = await fetch(`${Config.API_ENDPOINT}/users/update-user`, settings);
             const resp = await fetchResponse.json();
-            console.log(resp, 'data');
-            
+            console.log(resp);
         } catch (e) {
-            
+            console.log(e);
         }
     }
 

@@ -36,6 +36,8 @@
     .homepage{
         display: flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: center;
     }
     /* intro section */
     .intro{

@@ -45,7 +45,7 @@ class GroupsPage extends React.Component{
             joined: data,
             user: 'joined group'
         })
-        console.log('state changed');
+       
     }
 
     // leave the group
@@ -60,9 +60,9 @@ class GroupsPage extends React.Component{
         }
         const fetchResponse = await fetch(`${Config.API_ENDPOINT}/member/${this.props.match.params.id}`, settings);
         
-        console.log(fetchResponse, 'fetch response leaving');
+        
         if(fetchResponse.status === 200){
-            console.log('user has left the group');
+           
             this.setState({
                 user: null
             })
@@ -132,20 +132,19 @@ class GroupsPage extends React.Component{
         try {
             const fetchResponse = await fetch(`${Config.API_ENDPOINT}/member/${this.props.match.params.id}`, settings);
             const data = await fetchResponse.json();
-            console.log(data, 'data from checking user');
+           
             // if the suer isnt in the group.
             if(fetchResponse.status === 200){
                 this.setState({
                     // user tells us if the user is in the group
                     user: data.user
                 });
-                console.log('user is in this group');
+               
             }else{
                 this.setState({
                     user: null
                 })
-                // if the user is already in the group
-                console.log('user is not in this group')
+              
             }
            
         } catch (err) {
@@ -167,7 +166,7 @@ class GroupsPage extends React.Component{
 
     componentDidUpdate(prevProps, prevState){
         if(this.props.match.params.id !== prevProps.match.params.id){
-            console.log('a change is a happening');
+          
             // get the group data
             this.getGroup();
             this.checkUser();
@@ -180,20 +179,20 @@ class GroupsPage extends React.Component{
     // then will display a message stating welcome to the group
     handleSubmit = e =>{
         e.preventDefault();
-        console.log('welcome to the group')
+       
         this.joinGroup();
     }
 
     handleLeave = e =>{
         e.preventDefault();
-        console.log('left the group');
+      
         this.leaveGroup();
     }
 
 
     // display the name of the group.
     renderGroupName(){
-        console.log(this.props.match.params.id);
+       
         if(this.state.group.name){
             return (
                 <h1>{this.state.group.name}</h1>
@@ -240,7 +239,7 @@ class GroupsPage extends React.Component{
 
 
     render(){
-        console.log('rendering', this.state);
+       
         return(
             <div className="groups-page">
                 {/* if the user just joined the group welcome them */}

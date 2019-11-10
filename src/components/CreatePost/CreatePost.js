@@ -28,7 +28,7 @@ class CreatePost extends React.Component{
         try{
             const fetchResponse = await fetch(`${Config.API_ENDPOINT}/posts`, settings);
             const data = await fetchResponse.json();
-            console.log(data, 'data');
+           
             this.context.addPost(data);
         }catch(e){
              this.context.setError(e);

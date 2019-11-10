@@ -119,7 +119,7 @@ class Posts extends React.Component{
                 .then(res => (res.ok ? res : Promise.reject(res)))
                 .then(res => res.json())
                 .then(res=> {
-                    console.log(res, 'posts');
+                   
                     this.context.setPosts(res, false)
                 });
 

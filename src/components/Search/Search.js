@@ -22,13 +22,9 @@ class Search extends React.Component{
         try {
             const fetchResponse = await fetch(`${Config.API_ENDPOINT}/search/`, settings);
             const data = await fetchResponse.json();
-            console.log('getting search results');
-            console.log(data, 'search results');
-
             this.context.setPosts(data.posts);
             this.context.setGroups(data.groups);
             this.context.setPeople(data.people);
-            console.log('finished setting data');
             
         } catch (e) {
             console.log(e)

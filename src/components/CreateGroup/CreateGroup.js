@@ -39,11 +39,10 @@ class CreateGroup extends React.Component{
         }
 
        try{
-           console.log('sending to api')
+          
            const fetchResponse = await fetch(`${Config.API_ENDPOINT}/groups/`, settings);
            const data = await fetchResponse.json();
-           console.log(data.id, 'data id')
-           console.log('setting state')
+          
            this.setState({
                group: data
            });
@@ -62,7 +61,7 @@ class CreateGroup extends React.Component{
         this.setState({
             error: null
         })
-        console.log('new group submitted');
+       
         // get data from inputs
         const {name, about, level} = e.target;
 

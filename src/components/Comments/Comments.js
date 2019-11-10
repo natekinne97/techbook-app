@@ -43,7 +43,7 @@ class Comments extends React.Component{
 
     // render all comments
     renderComments = ()=>{
-        console.log('rendering comments')
+       
         return (
             <>
                 {this.state.comments.map(comment => (

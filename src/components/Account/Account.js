@@ -56,7 +56,7 @@ class Account extends React.Component{
     }
     // trigger the friend adding.
     handleSubmit = ()=>{
-        console.log('button pushed')
+       
         this.addFriend();
     }
 
@@ -71,15 +71,13 @@ class Account extends React.Component{
         // check if an id is being used
         if (this.props.match.params.id) {
             id = this.props.match.params.id;
-            console.log(id);
-
         }
         // check if we are looking at the current users account or a different one
         if (Number(id) > 0) {
-            console.log('using id')
+           
             url = `${Config.API_ENDPOINT}/users/profile?profile=${id}`;
         } else {
-            console.log('current user')
+           
             // load the users profile
             url = `${Config.API_ENDPOINT}/users/profile`;
         }
@@ -101,7 +99,7 @@ class Account extends React.Component{
         const fetchResponse = await fetch(url, settings);
         const data = await fetchResponse.json();
         
-        console.log(data[0], 'data0');
+       
         this.setState({
             accountInfo: data
         })
@@ -185,8 +183,6 @@ class Account extends React.Component{
     }
 
     render(){
-        console.log('hello i am working');
-        // console.log(this.props.match.params.id);
         return(
             <div className="account">
                 {this.renderAccountInfo()}

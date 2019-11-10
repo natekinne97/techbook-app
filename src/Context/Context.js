@@ -52,7 +52,7 @@ export class PostProvider extends React.Component{
 
     // set initial posts from server
     setPosts =  (posts, isLoading)=>{
-        console.log(isLoading)
+       
          this.setState({
             posts: posts,
             isLoading: isLoading
