@@ -39,14 +39,34 @@ class GroupsPage extends React.Component{
             },
 
         }
-        const fetchResponse = await fetch(`${Config.API_ENDPOINT}/member/add/${this.props.match.params.id}`, settings);
+        const fetchResponse = await fetch(`${Config.API_ENDPOINT}/member/${this.props.match.params.id}`, settings);
         const data = await fetchResponse.json();
         this.setState({
             joined: data,
             user: 'joined group'
         })
-        console.log('Welcome to the group');
+        console.log('state changed');
+    }
+
+    // leave the group
+    leaveGroup = async ()=>{
+        const settings = {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+
+        }
+        const fetchResponse = await fetch(`${Config.API_ENDPOINT}/member/${this.props.match.params.id}`, settings);
         
+        console.log(fetchResponse, 'fetch response leaving');
+        if(fetchResponse.status === 200){
+            console.log('user has left the group');
+            this.setState({
+                user: null
+            })
+        }
     }
 
     // get the groups information
@@ -110,19 +130,22 @@ class GroupsPage extends React.Component{
         }
 
         try {
-            const fetchResponse = await fetch(`${Config.API_ENDPOINT}/member/check/${this.props.match.params.id}`, settings);
+            const fetchResponse = await fetch(`${Config.API_ENDPOINT}/member/${this.props.match.params.id}`, settings);
             const data = await fetchResponse.json();
-            console.log(data, 'data');
+            console.log(data, 'data from checking user');
             // if the suer isnt in the group.
-            if(data.message){
+            if(fetchResponse.status === 200){
                 this.setState({
                     // user tells us if the user is in the group
-                    user: data.message
+                    user: data.user
                 });
-                console.log('user is not in this group');
+                console.log('user is in this group');
             }else{
+                this.setState({
+                    user: null
+                })
                 // if the user is already in the group
-                console.log('user is in this group')
+                console.log('user is not in this group')
             }
            
         } catch (err) {
@@ -161,6 +184,12 @@ class GroupsPage extends React.Component{
         this.joinGroup();
     }
 
+    handleLeave = e =>{
+        e.preventDefault();
+        console.log('left the group');
+        this.leaveGroup();
+    }
+
 
     // display the name of the group.
     renderGroupName(){
@@ -178,28 +207,26 @@ class GroupsPage extends React.Component{
     }
 
     renderAbout(){
-       
-        if(this.state.group.about){
 
-            return (
-                <div className="about-container">
-                    <h3>About</h3>
-                   
-                    <p>{this.state.group.about}</p>
-
-                    <h3>Who is this group for?</h3>
-                    <p>{this.state.group.level}</p>
-                    {/* this form adds the user into the group. 
-                    in the future you will be able to leave the group.
-                */}
-                    <form onSubmit={this.handleSubmit}>
-                        {this.state.user
-                            ? <button>Join</button>
-                        : null }
-                    </form>
-                </div>
-            );
-        }
+        return (
+            <div className="about-container">
+                <h3>About</h3>
+               
+                <p>{this.state.group.about}</p>
+                <h3>Who is this group for?</h3>
+                <p>{this.state.group.level}</p>
+                {/* this form adds the user into the group. 
+                in the future you will be able to leave the group.
+            */}
+                {/* <button onClick={this.handleLeave}>Leave</button> */}
+                {this.state.user
+                    ? <button onClick={this.handleLeave}>Leave</button> 
+                    : <button onClick={this.handleSubmit}>Join</button>}
+              
+                
+            </div>
+        );
+        
         
     }
 
@@ -213,7 +240,7 @@ class GroupsPage extends React.Component{
 
 
     render(){
-        
+        console.log('rendering', this.state);
         return(
             <div className="groups-page">
                 {/* if the user just joined the group welcome them */}
