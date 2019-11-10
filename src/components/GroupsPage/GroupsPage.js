@@ -23,7 +23,7 @@ class GroupsPage extends React.Component{
     // store the group in the state
     state= {
         group: [],
-        user: [],
+        user: null,
         error: null,
         joined: [],
         prev: 0
@@ -116,12 +116,13 @@ class GroupsPage extends React.Component{
             // if the suer isnt in the group.
             if(data.message){
                 this.setState({
+                    // user tells us if the user is in the group
                     user: data.message
                 });
-                console.log('user is in this group');
+                console.log('user is not in this group');
             }else{
                 // if the user is already in the group
-                console.log('user is not in this group')
+                console.log('user is in this group')
             }
            
         } catch (err) {
@@ -192,7 +193,7 @@ class GroupsPage extends React.Component{
                     in the future you will be able to leave the group.
                 */}
                     <form onSubmit={this.handleSubmit}>
-                        {Number(this.state.user) > 0
+                        {this.state.user
                             ? <button>Join</button>
                         : null }
                     </form>

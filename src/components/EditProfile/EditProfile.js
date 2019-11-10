@@ -83,7 +83,7 @@ class EditProfile extends React.Component{
         // set all back to null
         user_name.value = '';
         full_name.value = '';
-        bio.value = '';
+        
         occupation.value = '';
         this.updateProfile(updateUser);
         this.redirect();

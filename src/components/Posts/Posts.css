@@ -26,6 +26,12 @@
     height: 4vh;
 }
 
+.user-link a{
+    color: black;
+    font-weight: 600;
+    font-size: .4em;
+}
+
 .post-text{
     font-size: 30px;
 }

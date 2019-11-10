@@ -33,15 +33,15 @@ class SearchResults extends React.Component{
         
     }
 
-    // fix the to in this section
+    
     renderPeople(){
         // only return if there is content
         if(this.context.people.length > 0){
             console.log('rendering people')
             return (
                 <div className="people-container">
-                    {this.context.people.map(person => (
-                        <Link to={`/account/${person.id}`} className="person">
+                    {this.context.people.map((person, index) => (
+                        <Link key={person.id + index} to={`/account/${person.id}`} className="person">
                             {person.name}
                         </Link>
                     ))}

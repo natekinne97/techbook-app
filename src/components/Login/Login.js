@@ -4,6 +4,7 @@ import authApi from '../../auth-service/auth-service';
 import TokenService from '../../services/token-services';
 
 class Login extends React.Component {
+   
 
     static defaultProps = {
         onLoginSuccess: () => { }
@@ -27,7 +28,8 @@ class Login extends React.Component {
                 console.log('loged in');
                 // save token
                 TokenService.saveAuthToken(res.authToken)
-                this.props.onLoginSuccess()
+
+                this.props.onLoginSuccess(res.user);
             }).catch(error => {
                 console.log(error.error, 'error');
                 this.setState({

@@ -28,55 +28,117 @@ class Account extends React.Component{
     
     state = {
         accountInfo: [],
-        error: null
+        error: null,
+        friendStatus: []
     }
 
-    componentDidMount(){
-        let url;
-        try{
-            if (this.props.match.params.id){
-                const id = this.props.match.params.id;
-                console.log(id);
-                this.setState({
-                    pev: id
-                })
-            }
-        }catch(err){
-            console.log(err);
+    // handle submits for adding a friend
+    addFriend = async ()=>{
+        
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+
         }
+
+        const url = `${Config.API_ENDPOINT}/friends/${this.props.match.params.id}`;
+
+        const fetchResponse = await fetch(url, settings);
+        const data = await fetchResponse.json();
+        // update friends status
+        this.setState({
+            friendStatus: data
+        })
+
+    }
+    // trigger the friend adding.
+    handleSubmit = ()=>{
+        console.log('button pushed')
+        this.addFriend();
+    }
+
+    /*
+        on load get the data
+
+    */
+     
+    geturl(){
+        let url;
         let id;
+        // check if an id is being used
         if (this.props.match.params.id) {
             id = this.props.match.params.id;
             console.log(id);
-            
+
         }
-       
         // check if we are looking at the current users account or a different one
-        if(Number(id) > 0){
+        if (Number(id) > 0) {
             console.log('using id')
             url = `${Config.API_ENDPOINT}/users/profile?profile=${id}`;
-        }else{
+        } else {
             console.log('current user')
             // load the users profile
             url = `${Config.API_ENDPOINT}/users/profile`;
         }
 
-         
+        return url;
+    }
 
-        // get the users profile
-        fetch(url, {
+    fetchUserProfile = async ()=>{
+        let url = this.geturl();
+
+        const settings = {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
-            }
+            },
+
+        }
+        const fetchResponse = await fetch(url, settings);
+        const data = await fetchResponse.json();
+        
+        console.log(data[0], 'data0');
+        this.setState({
+            accountInfo: data
         })
-            .then(res => (res.ok ? res : Promise.reject(res)))
-            .then(res => res.json())
-            .then(res => this.setState({
-                accountInfo: res
-            }))
-            .catch(err => this.setState({error: err}));
+
+
+    }
+
+    // checks friend status. if already friends or not
+    checkFriendStatus = async ()=>{
+        const url = `${Config.API_ENDPOINT}/friends/check/${this.props.match.params.id}`;
+
+        const settings = {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+
+        }
+
+        const fetchResponse = await fetch(url, settings);
+        const data = await fetchResponse.json();
+
+        this.setState({
+            friendStatus: data
+        })
+
+    }
+
+    componentDidMount(){
+        this.fetchUserProfile();
+        // we only want to check friend status if there is an id in the
+        // params
+        if(this.props.match.params.id){
+            this.checkFriendStatus();
+        }
+       
     }
 
     renderAccountInfo(){
@@ -85,11 +147,16 @@ class Account extends React.Component{
             <div className="basic">
                 <div className="edit-button">
                     {/* check if user owns the account */}
-                    {!this.props.user_id
+                    {!this.props.match.params.id
                         ? <Link to="/edit-profile">
                             <FontAwesomeIcon icon={faPencilAlt} />
                         </Link>
                         : null}
+                    {/* if they dont own the account check
+                    if they are friends and if not display the button */}
+                    {this.state.friendStatus.message
+                        ? <button onClick={this.handleSubmit}>Add Friend</button>
+                    : null}
                 </div>
                 <h4>Username</h4>
                 <p>{this.state.accountInfo.user_name}</p>

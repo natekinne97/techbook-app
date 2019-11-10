@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 
 
 // Components
-import LoginPage from '../../routes/LoginPage'
 import CreatePage from '../../routes/CreatePage';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import Reset from '../Reset/Reset';
@@ -157,11 +156,7 @@ class App extends React.Component {
               component={GroupsPage}
             />
            
-            {/* login route */}
-            <Route
-              path="/login"
-              component={LoginPage}
-            />
+           
             {/* signup */}
             <Route
               path="/signup"

@@ -24,7 +24,7 @@ class Comments extends React.Component{
     }
 
     componentDidMount(){
-     
+        // get all the comments
         fetch(`${Config.API_ENDPOINT}/comments/${this.props.postId}`, {
             method: 'GET',
             headers: {

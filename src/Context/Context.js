@@ -9,16 +9,20 @@ const PostContext = React.createContext({
     searching: null,
     groups: [],
     people: [],
+    user: null,
 
     // set data
     setPosts: ()=>{},
     setComments: ()=>{},
     setPeople: ()=>{},
     setGroups: ()=>{},
+    setUser: ()=>{},
+    clearUser: ()=>{},
 
     // add data
     addComment: ()=>{},
     addPost: ()=>{},
+    clearState: ()=>{},
 
     // handle the display of the search results
     setSearch: ()=>{},
@@ -43,6 +47,7 @@ export class PostProvider extends React.Component{
         groups: [],
         people: [],
         error: null,
+        user: [],
     }
 
     // set initial posts from server
@@ -100,9 +105,34 @@ export class PostProvider extends React.Component{
         })
     }
 
+    setUser = usr => {
+        this.setState({
+            user: usr
+        })
+    }
+
+    clearUser = ()=>{
+        this.setState({
+            user: []
+        })
+    }
+
     clearSearch = ()=>{
         this.setState({
             searching: null
+        })
+    }
+
+    clearState = ()=>{
+        this.setState({
+            posts: [],
+            comments: [],
+            isLoading: true,
+            searching: null,
+            groups: [],
+            people: [],
+            error: null,
+            user: [],
         })
     }
 
@@ -140,10 +170,12 @@ export class PostProvider extends React.Component{
 
             // search handling
             setSearch: this.setSearch,
+            setUser: this.setUser,
+            clearUser: this.clearError,
 
             // error handling
             setError: this.setError,
-
+            clearState: this.clearState,
             // clear error
             clearError: this.clearError,
             clearSearch: this.clearSearch
