@@ -1,12 +1,9 @@
 import React from 'react';
 
-// remove on non static version
-import STORE from '../../STORE';
-
 import Config from '../../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp, faThumbsDown} from '@fortawesome/free-solid-svg-icons'
-
+import {Link} from 'react-router-dom';
 import PostContext from '../../Context/Context';
 import Error from '../Error/Error';
 import Comments from '../Comments/Comments';
@@ -24,27 +21,65 @@ class Posts extends React.Component{
     // upvote.
     // the server will also send back an updated comment number.
 
+    static defaultProps = {
+        location: {},
+        history: {
+            push: () => { },
+        },
+        match: { params: {} },
+    }
+
+    // handle votes.
+    vote = async vote => {
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+            body: JSON.stringify(vote)
+        }
+
+        try {
+            const fetchResponse = await fetch(`${Config.API_ENDPOINT}/votes/`, settings);
+            const data = await fetchResponse.json();
+            // if the sum increased then add it to the posts and refresh
+            if(data[0].sum){
+                let post = this.context.posts.find(post => post.id === vote.post_id);
+                post.sum = data[0].sum;
+                this.context.setPosts(this.context.posts);
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     state={
         votes: 0,
         posts: [],
         // displays comments only for the single post
         showComments:{
 
-        }
+        },
+        currentParam: 0
     }
 
 
     // fake data to show the static users the basics
-    upVote = position =>{
+    upVote = (position, id) =>{
+        
         if(position === 'up'){
-            this.setState({
-                votes: this.state.votes+1
-            })
-
+            const newVote = {
+                vote: 1,
+                post_id: id
+            }
+            this.vote(newVote);
         }else if(position === 'down'){
-            this.setState({
-                votes: this.state.votes-1
-            })
+            const newVote = {
+                vote: -1,
+                post_id: id
+            }
+            this.vote(newVote);
         }else{
             console.log('Must be a string up or down')
         }
@@ -60,7 +95,7 @@ class Posts extends React.Component{
 
     // for sending the id to the comments on which post to display comments
     commentsClicked = id =>{
-        console.log(id)
+        
         this.setState({
             showComments: {
                 ...this.state.showComments,
@@ -68,10 +103,12 @@ class Posts extends React.Component{
             }
         })
     }
+
     // get the data
     componentDidMount(){
+        
         try{
-            // fetch
+            // fetch posts
             fetch(`${Config.API_ENDPOINT}/posts/`, {
                 method: 'GET',
                 headers: {
@@ -81,7 +118,10 @@ class Posts extends React.Component{
             })
                 .then(res => (res.ok ? res : Promise.reject(res)))
                 .then(res => res.json())
-                .then(res=> this.context.setPosts(res, false));
+                .then(res=> {
+                   
+                    this.context.setPosts(res, false)
+                });
 
         
         }catch(e){
@@ -93,20 +133,30 @@ class Posts extends React.Component{
 
 
     testRenderPost = ()=>{
-        console.log(this.context.isLoading);
+        
         return (
             <>
-                {this.context.posts.map(post => (
-                    <div id={post.id} key={post.id} className="post">
+                {this.context.posts.map((post, index) => (
+                    <div id={post.id} key={index} className="post">
                         <div className="post-meta">
-                            <p>{post.user}</p>
+                            <p className="user-link">
+                                <Link to={`/account/${post.user_id}`}>
+                                {post.full_name}
+                            </Link></p>
                             <p>{post.date_created}</p>
                         </div>
                         <p className="post-text">{post.post}</p>
+                        <div className="stats">
+                            <span>
+                            <FontAwesomeIcon icon={faThumbsUp} />
+                                {post.sum}
+                               </span>
+                            <span>Comments</span>
+                        </div>
                         <div className="rating">
 
-                            <FontAwesomeIcon icon={faThumbsUp} value='1' onClick={e => this.upVote('up')} />
-                            <FontAwesomeIcon icon={faThumbsDown} value='-1' onClick={e => this.upVote('down')} />
+                            <FontAwesomeIcon icon={faThumbsUp} value='1' onClick={e => this.upVote('up', post.id)} />
+                            <FontAwesomeIcon icon={faThumbsDown} value='-1' onClick={e => this.upVote('down', post.id)} />
                             <p onClick={e => this.commentsClicked(post.id)}>Comments</p>
 
                         </div>
@@ -123,44 +173,11 @@ class Posts extends React.Component{
     }
 
    
-    // map out the store and put the data into a post div
-    renderPosts(){
-       let posts = STORE.map(post=> <div id={post.id} key={post.id} className="post">
-          
-            <div className="post-meta">
-                <p>{post.user}</p>
-                <p>{post.date_created}</p>
-            </div>
-            <p className="post-text">{post.text}</p>
-            <div className="stats">
-                <span> 
-                    <FontAwesomeIcon icon={faThumbsUp}/> 
-                  {this.state.votes}</span>
-                <span>{post.num_comments} Comments</span>
-            </div>
-            <div className="rating">
-               
-                <FontAwesomeIcon icon={faThumbsUp} value='1' onClick={e=>this.upVote('up')} />
-               <FontAwesomeIcon icon={faThumbsDown} value='-1' onClick={e=>this.upVote('down')} />
-                <p onClick={e => this.commentsClicked(post.id)}>Comments</p>
-
-            </div>
-
-           {this.state.showComments[post.id]
-               ? <Comments postId={post.id} />
-                : null
-           }
-           
-           
-       </div>)
-
-       return posts;
-    }
 
     
 
     render(){
-        
+       
         return(
             <div className="post-container">
                 {/* render error */}

@@ -75,7 +75,8 @@ top menu includes search bar and header TB
 @media screen and (min-width: 1024px){
     /* change the menu style so it can be used for desktops */
     .mobile-menu-items{
-        width: 6.3em;
+        width: 4em;
+        margin-right: .2em;
         position: absolute;
         right: 4px;
         text-align: end;

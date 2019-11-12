@@ -2,19 +2,92 @@ import React from 'react';
 import './CreateGroup.css';
 
 
+import Error from '../Error/Error';
+import TokenService from '../../services/token-services';
+import Config from '../../config';
 // this component allows the user to create a new group forum topic
 // one that specifically aligns with their technical niche
 class CreateGroup extends React.Component{
+    static defaultProps = {
+        location: {},
+        history: {
+            push: () => { },
+        },
+    }
 
-    // here we will have a call to post 
-    // '/new-group' and insert the new group into db with the user as the 
-    // first enrty in the group
+
+    // state for redirect
+    state = {
+        group: [],
+        error: null
+    }
+
+    redirectGroup(){
+        const {history} = this.props;
+        history.push(`/group/${this.state.group.id}`)
+    }
+    
+    // async call to fetch
+    insertGroup = async newGroup =>{
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+            body: JSON.stringify(newGroup)
+        }
+
+       try{
+          
+           const fetchResponse = await fetch(`${Config.API_ENDPOINT}/groups/`, settings);
+           const data = await fetchResponse.json();
+          
+           this.setState({
+               group: data
+           });
+           this.redirectGroup();
+       }catch(err){
+           this.setState({
+               error: err
+           })
+       }
+    }
+
+    // handle submit
+    handleSubmit = e =>{
+        e.preventDefault();
+        // clear error
+        this.setState({
+            error: null
+        })
+       
+        // get data from inputs
+        const {name, about, level} = e.target;
+
+        // object to send
+        const newGroup = {
+            group_name: name.value,
+            about: about.value,
+            exp_lvl: level.value
+        }
+
+        this.insertGroup(newGroup);
+        
+    }
+
+    // a call a to redirect to newly creater page
 
     render(){
         return(
             <div className="group-container">
                 <h1>New group</h1>
-                <form className="group-form">
+                <form className="group-form" onSubmit={this.handleSubmit}>
+
+                    {this.state.error
+                    ? <Error err={this.state.error}/>
+                    : null}
+
                     <label htmlFor="name">Group Name:</label>
                     <input type="text" name="name"/>
 

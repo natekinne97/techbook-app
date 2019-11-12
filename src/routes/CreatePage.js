@@ -12,7 +12,7 @@ export default class LoginPage extends Component {
 
     onCreate = () => {
         const { history } = this.props
-        history.push('/');
+        history.push('/home');
     }
 
     render() {

@@ -31,9 +31,9 @@ class CreateComment extends React.Component{
         }
 
         try {
-            const fetchResponse = await fetch(`${Config.API_ENDPOINT}/posts/comment`, settings);
+            const fetchResponse = await fetch(`${Config.API_ENDPOINT}/comments/`, settings);
             const data = await fetchResponse.json();
-            console.log(data, 'data');
+           
             this.context.addComment(data);
         } catch (e) {
             this.context.setError(e);
@@ -49,7 +49,7 @@ class CreateComment extends React.Component{
             comment: comment.value
         }
         comment.value = '';
-        console.log(newComment, 'new comment');
+       
 
         this.insertComment(newComment);
     }

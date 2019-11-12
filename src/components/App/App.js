@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 
 
 // Components
-import LoginPage from '../../routes/LoginPage'
 import CreatePage from '../../routes/CreatePage';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import Reset from '../Reset/Reset';
@@ -15,6 +14,7 @@ import Account from '../Account/Account';
 // import Signup from '../Signup/Signup';
 import CreateGroup from '../CreateGroup/CreateGroup';
 import EditProfile from '../EditProfile/EditProfile';
+import GroupsPage from '../GroupsPage/GroupsPage';
 
 // private route
 import PrivateRoute from '../../routes/private';
@@ -32,6 +32,7 @@ class App extends React.Component {
     console.error(error)
     return { hasError: true }
   }
+  
   componentDidMount() {
     try {
       /*
@@ -128,23 +129,34 @@ class App extends React.Component {
               component={PostFeed}
             />
 
-            {/* account info and edit */}
+            {/* shows the friends account page
+                their bio, and add them as a friend
+            */}
             <PrivateRoute
+              path="/account/:id"
+              component={Account}
+            />
+
+            {/* account info and edit for personal profile */}
+            <PrivateRoute
+              exact
               path="/account"
               component={Account}
             />
+           
 
             {/* create a new group */}
             <PrivateRoute
               path="/make-group"
               component={CreateGroup}
             />
-           
-            {/* login route */}
-            <Route
-              path="/login"
-              component={LoginPage}
+            {/* look at group */}
+            <PrivateRoute
+              path="/group/:id"
+              component={GroupsPage}
             />
+           
+           
             {/* signup */}
             <Route
               path="/signup"

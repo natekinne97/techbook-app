@@ -19,9 +19,13 @@ class Comments extends React.Component{
         postId: ''
     }
 
+    state = {
+        comments: []
+    }
+
     componentDidMount(){
-     
-        fetch(`${Config.API_ENDPOINT}/posts/comments/${this.props.postId}`, {
+        // get all the comments
+        fetch(`${Config.API_ENDPOINT}/comments/${this.props.postId}`, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -30,17 +34,19 @@ class Comments extends React.Component{
         })
             .then(res => (res.ok ? res : Promise.reject(res)))
             .then(res => res.json())
-            .then(res => this.context.setComments(res, false))
+            .then(res => this.setState({
+                comments: res
+            }))
             .catch(err=> this.context.setError(err));
 
     }
 
     // render all comments
     renderComments = ()=>{
-        console.log('rendering comments')
+       
         return (
             <>
-                {this.context.comments.map(comment => (
+                {this.state.comments.map(comment => (
                     
                     <div key={comment.id} className="comment">
                         <p>{comment.user}</p>

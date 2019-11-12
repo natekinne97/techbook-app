@@ -5,19 +5,25 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import TokenService from '../../services/token-services';
 import IdleService from '../../services/idle-services';
 import Group from '../Group/Group';
+import Search from '../Search/Search';
+import PostContext from '../../Context/Context';
 import './Menu.css';
 
 // the menu. certian part will be displayed when logged in and when not
 // this class also will handle searches made in the search bar
 class Menu extends React.Component{
+    static contextType = PostContext;
 
     state = {
+        // hiding the burger menu   
         burger: 'hidden',
+        // group is for the sidebar
         group: 'hidden'
     }
 
     // handles logout
     handleLogoutClick = () => {
+        this.context.clearState();
         TokenService.clearAuthToken()
         /* when logging out, clear the callbacks to the refresh api and idle auto logout */
         TokenService.clearCallbackBeforeExpiry()
@@ -99,9 +105,7 @@ class Menu extends React.Component{
                         {/* <Link>TechBook</Link> */}
                     </header>
                     {/* search bar */}
-                    <form>
-                        <input className="input-field" type="text" name="search" value="search" />
-                    </form>
+                    <Search />
                     {/* burger menu */}
                     <FontAwesomeIcon icon={faBars} onClick={this.burgerClicked}/>
 
@@ -112,6 +116,7 @@ class Menu extends React.Component{
                 ? this.renderBurgerMenu()
                 : null
                 }
+
                 {/* render side bar */}
                 {TokenService.hasAuthToken()
                 ? this.renderSideBar()
