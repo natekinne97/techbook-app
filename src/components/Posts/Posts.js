@@ -61,7 +61,8 @@ class Posts extends React.Component{
         showComments:{
 
         },
-        currentParam: 0
+        currentParam: 0,
+        addBar: ''
     }
 
 
@@ -97,6 +98,7 @@ class Posts extends React.Component{
     commentsClicked = id =>{
         
         this.setState({
+            addBar: 'show-bar',
             showComments: {
                 ...this.state.showComments,
                  [id]: true
@@ -129,7 +131,11 @@ class Posts extends React.Component{
         }
     }
 
-    
+    // converts the date to the local date
+    fixDate = date =>{
+        let newDate = new Date(date);
+        return newDate.toLocaleDateString('en-US');
+    }
 
 
     testRenderPost = ()=>{
@@ -143,7 +149,7 @@ class Posts extends React.Component{
                                 <Link to={`/account/${post.user_id}`}>
                                 {post.full_name}
                             </Link></p>
-                            <p>{post.date_created}</p>
+                            <p>{this.fixDate(post.date_created)}</p>
                         </div>
                         <p className="post-text">{post.post}</p>
                         <div className="stats">
@@ -153,7 +159,7 @@ class Posts extends React.Component{
                                </span>
                             <span>Comments</span>
                         </div>
-                        <div className="rating">
+                        <div className={`rating ${this.state.addBar}`}>
 
                             <FontAwesomeIcon icon={faThumbsUp} value='1' onClick={e => this.upVote('up', post.id)} />
                             <FontAwesomeIcon icon={faThumbsDown} value='-1' onClick={e => this.upVote('down', post.id)} />
@@ -165,7 +171,7 @@ class Posts extends React.Component{
                             ? <Comments postId={post.id} />
                             : null
                         }
-
+ 
                     </div>
                 ))}
             </>

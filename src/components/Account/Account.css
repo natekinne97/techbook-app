@@ -6,6 +6,14 @@
     border: 1px solid black;
 }
 
+.basic h4{
+    font-size: 1.6em;
+    margin: 0;
+}
+
+.basic{
+    font-size: 1.5em;
+}
 .edit-button{
     display: flex;
     justify-content: flex-end;

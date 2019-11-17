@@ -3,42 +3,21 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
-import PostContext from '../../Context/Context';
+
 import Error from '../Error/Error';
-import TokenService from '../../services/token-services';
-import Config from '../../config';
+
 
 // this class will handle all of the comment additions
 // we will be recieving the post id in context and sending that to the
 // server
 class CreateComment extends React.Component{
-    static contextType = PostContext;
-
+    
     static defaultProps = {
-        postId: ''
+        postId: '',
+        addComment: ()=>{}
     }
 
-    // ascync comment insert
-    insertComment = async newComment => {
-
-        const settings = {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-                'authorization': `bearer ${TokenService.getAuthToken()}`,
-            },
-            body: JSON.stringify(newComment)
-        }
-
-        try {
-            const fetchResponse = await fetch(`${Config.API_ENDPOINT}/comments/`, settings);
-            const data = await fetchResponse.json();
-           
-            this.context.addComment(data);
-        } catch (e) {
-            this.context.setError(e);
-        }
-    }
+   
 
     handleSubmit = e=>{
         e.preventDefault();
@@ -51,7 +30,7 @@ class CreateComment extends React.Component{
         comment.value = '';
        
 
-        this.insertComment(newComment);
+        this.props.insertComment(newComment);
     }
 
     render(){

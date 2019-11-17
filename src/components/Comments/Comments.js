@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 import CreateComment from '../CreateComment/CreateComment';
 import PostContext from '../../Context/Context';
 import Error from '../Error/Error';
@@ -23,7 +23,36 @@ class Comments extends React.Component{
         comments: []
     }
 
+    // ascync comment insert
+    insertComment = async newComment => {
+
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+            body: JSON.stringify(newComment)
+        }
+
+        try {
+            const fetchResponse = await fetch(`${Config.API_ENDPOINT}/comments/`, settings);
+            const data = await fetchResponse.json();
+           
+            const tmpSate = [data, ...this.state.comments];
+           
+            this.setState({
+                comments: tmpSate
+            });
+            
+        } catch (e) {
+            
+            this.context.setError(e);
+        }
+    }
+
     componentDidMount(){
+       
         // get all the comments
         fetch(`${Config.API_ENDPOINT}/comments/${this.props.postId}`, {
             method: 'GET',
@@ -34,27 +63,39 @@ class Comments extends React.Component{
         })
             .then(res => (res.ok ? res : Promise.reject(res)))
             .then(res => res.json())
-            .then(res => this.setState({
-                comments: res
-            }))
-            .catch(err=> this.context.setError(err));
+            .then(res => {
+                this.setState({
+                  comments: res
+                });
+                
+            })
+            .catch(err=> {
+                this.context.setError(err);
+            });
 
     }
 
     // render all comments
     renderComments = ()=>{
-       
-        return (
-            <>
+        if(this.state.comments){
+            return (
+              <>
                 {this.state.comments.map(comment => (
-                    
-                    <div key={comment.id} className="comment">
-                        <p>{comment.user}</p>
-                        <p>{comment.comment}</p>
-                    </div>
+                  <div key={comment.id} className="comment">
+                    <p className="commenter">
+                        <Link to={`/account/${comment.user_id}`}>
+                            {comment.user}
+                        </Link></p>
+                    <p className="comment-text">{comment.comment}</p>
+                  </div>
                 ))}
-            </>
-        );
+              </>
+            );
+        }else{
+            return (
+                <><Error err="Something went wrong"/></>
+            );
+        }
     }
 
 
@@ -62,19 +103,16 @@ class Comments extends React.Component{
        
         return(
             <div className="comments-container">
-                <button>Load more comments...</button>
+                
                 {/* render error message    */}
                 {this.context.Error 
                 ? <Error err={this.context.error}/>
                 : null}
 
-                    
-                {!this.context.isLoading
-                ? this.renderComments()
-                : <h1>Loading...</h1>}
-                
+                {this.renderComments()}
 
-                <CreateComment postId={this.props.postId}/>
+                
+                <CreateComment insertComment={this.insertComment} postId={this.props.postId}/>
             </div>
         );
     }

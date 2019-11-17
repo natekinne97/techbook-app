@@ -5,8 +5,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-     margin-bottom: 1em;
+    margin-bottom: 1em;
+    margin: 0 auto;
 }
+
 
 .search-results a{
     text-decoration: none;

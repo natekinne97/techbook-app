@@ -6,12 +6,11 @@ import {PostProvider} from './Context/Context';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<BrowserRouter>
+ReactDOM.render(
+<BrowserRouter>
    <PostProvider>
                 <App />
    </PostProvider>
-       
-    
    
 </BrowserRouter>, document.getElementById('root'));
 

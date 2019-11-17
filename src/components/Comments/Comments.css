@@ -11,3 +11,13 @@
     margin-bottom: 1%;
     border-radius: 10px;
 }
+
+.commenter{
+    font-size: 1.2em;
+}
+
+.comment-text{
+    margin-top: 0;
+    font-size: 1.6em;
+    
+}

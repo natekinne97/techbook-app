@@ -42,7 +42,7 @@ class Login extends React.Component {
     render() {
         return (
             <div className="login">
-                <header>Login</header>
+                
                 {this.state.error
                     ? <p className="red">{this.state.error}</p>
                     : null}
