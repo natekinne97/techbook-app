@@ -96,7 +96,6 @@ class App extends React.Component {
     this.forceUpdate()
   }
 
-
   render() {
     localStorage.lastUrl = window.location.pathname;
     return (
@@ -106,79 +105,77 @@ class App extends React.Component {
          <Menu/>
         </nav>
         <main>
-          <Switch>
-            {/* homepage */}
-            {/* 
+      
+            <Switch>
+              {/* homepage */}
+              {/* 
             landing page 
             and login
           */}
-            <Route
-              exact
-              path="/"
-              component={Homepage}
-            />
+              <Route
+                exact
+                path="/"
+                component={Homepage}
+              />
 
-            {/* <Route
-              path="/signup"
-              component={Signup}
-            /> */}
 
-            {/* logged in home page */}
-            <PrivateRoute
-              path="/home"
-              component={PostFeed}
-            />
+              {/* logged in home page */}
+              <PrivateRoute
+                path="/home"
+                component={PostFeed}
+              />
 
-            {/* shows the friends account page
+              {/* shows the friends account page
                 their bio, and add them as a friend
             */}
-            <PrivateRoute
-              path="/account/:id"
-              component={Account}
-            />
+              <PrivateRoute
+                path="/account/:id"
+                component={Account}
+              />
 
-            {/* account info and edit for personal profile */}
-            <PrivateRoute
-              exact
-              path="/account"
-              component={Account}
-            />
-           
+              {/* account info and edit for personal profile */}
+              <PrivateRoute
+                exact
+                path="/account"
+                component={Account}
+              />
 
-            {/* create a new group */}
-            <PrivateRoute
-              path="/make-group"
-              component={CreateGroup}
-            />
-            {/* look at group */}
-            <PrivateRoute
-              path="/group/:id"
-              component={GroupsPage}
-            />
-           
-           
-            {/* signup */}
-            <Route
-              path="/signup"
-              component={CreatePage}
-            />
 
-            <Route 
-              path="/edit-profile"
-              component={EditProfile}
-            />
+              {/* create a new group */}
+              <PrivateRoute
+                path="/make-group"
+                component={CreateGroup}
+              />
+              {/* look at group */}
+              <PrivateRoute
+                path="/group/:id"
+                component={GroupsPage}
+              />
 
-            {/* forgot password */}
-            <Route
-              path='/forgot-password'
-              component={ForgotPassword}
-            />
-            {/* reset password */}
-            <Route
-              path='/reset/:token'
-              component={Reset}
-            />
-          </Switch>
+
+              {/* signup */}
+              <Route
+                path="/signup"
+                component={CreatePage}
+              />
+
+              <Route
+                path="/edit-profile"
+                component={EditProfile}
+              />
+
+              {/* forgot password */}
+              <Route
+                path='/forgot-password'
+                component={ForgotPassword}
+              />
+              {/* reset password */}
+              <Route
+                path='/reset/:token'
+                component={Reset}
+              />
+            </Switch>
+
           
         </main>
       </div>

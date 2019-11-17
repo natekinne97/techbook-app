@@ -49,7 +49,7 @@ class CreatePost extends React.Component{
         return(
             <div className="create-post">
                 <form className="make-post" onSubmit={this.postSubmit}>
-                    <h3>Ask a question.</h3>
+                    <h3>Ask a question!</h3>
                     <textarea  name="post" required>
                     </textarea>
                     <button type="submit">Post</button>

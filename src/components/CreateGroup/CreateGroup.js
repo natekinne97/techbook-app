@@ -76,8 +76,6 @@ class CreateGroup extends React.Component{
         
     }
 
-    // a call a to redirect to newly creater page
-
     render(){
         return(
             <div className="group-container">
@@ -89,13 +87,13 @@ class CreateGroup extends React.Component{
                     : null}
 
                     <label htmlFor="name">Group Name:</label>
-                    <input type="text" name="name"/>
+                    <input type="text" name="name" required/>
 
                     <label htmlFor="about">About</label>
-                    <textarea name="about"></textarea>
+                    <textarea name="about" required></textarea>
 
                     <label htmlFor="level">What experience level is this for?</label>
-                    <input type="text" name="level"/>
+                    <input type="text" name="level" required/>
 
                     <button type="submit">Submit</button>
                 </form>

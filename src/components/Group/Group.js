@@ -52,25 +52,23 @@ class Group extends React.Component{
         if(this.state.groups.length > 0){
             
             return (
-                <>
-                    {this.state.groups.map(group=>(
-                        <li key={group.id}><Link to={`/group/${group.id}`}>
-                        {group.group_name}
-                        </Link></li>
-                    ))}
-                </>
+              <>
+                {this.state.groups.map(group => (
+                  <li className={this.props.show} key={group.id}>
+                    <Link to={`/group/${group.id}`}>{group.group_name}</Link>
+                  </li>
+                ))}
+              </>
             );
         }
     }
 
     render(){
-        return(
-            <ul className={this.props.show}>
-                {this.state.error
-                ? <Error err={this.state.error.error}/>
-                : null}
-                {this.renderGroups()}
-            </ul>
+        return (
+          <>
+            {this.state.error ? <Error err={this.state.error.error} /> : null}
+            {this.renderGroups()}
+          </>
         );
     }
 }

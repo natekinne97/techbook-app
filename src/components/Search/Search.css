@@ -1,5 +1,16 @@
-.search-results{
-    background: gray;
-    height: 20em;
-    width: 20em;
+
+
+    .input-field{
+        width: 12em;
+    }
+
+@media screen and (min-width: 1024px){
+    .input-field{
+       font-size: 1.2em;
+       width: auto;
+    }
+
+    .svg-inline--fa {
+        height: 1.2em;
+    }
 }

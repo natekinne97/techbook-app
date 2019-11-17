@@ -65,33 +65,47 @@ class Menu extends React.Component{
     // makes it easier to hide and show menu pieces based on login 
     renderBurgerMenu = ()=>{
 
-        return(
-            <ul className={`mobile-menu-items ${this.state.burger}`}>
-                <li className="hidden-desktop"><Link to='/home' onClick={this.burgerClicked}>Home</Link></li>
-                <li className="hidden-desktop" onClick={this.groupClicked}>
-                    Groups
-                        <Group show={this.state.group} />
-                </li>
-                <li className="hidden-desktop"><Link to="/make-group">Create a group</Link></li>
-                <li onClick={this.burgerClicked}><Link to="/account">Account</Link></li>
-                <li onClick={this.handleLogoutClick}><Link to="/">Logout</Link></li>
-            </ul>
+        return (
+          <ul className={`mobile-menu-items ${this.state.burger}`}>
+            <li className="hidden-desktop">
+              <Link to="/home" onClick={this.burgerClicked}>
+                Home
+              </Link>
+            </li>
+            <li className="hidden-desktop" onClick={this.groupClicked}>
+              Groups
+            </li>
+            <Group show={`hidden-desktop ${this.state.group}`} />
+            <li className="hidden-desktop" onClick={this.burgerClicked}>
+              <Link to="/make-group">Create a group</Link>
+            </li>
+            <li onClick={this.burgerClicked}>
+              <Link to="/account">Account</Link>
+            </li>
+            <li onClick={this.handleLogoutClick}>
+              <Link to="/">Logout</Link>
+            </li>
+          </ul>
         );
     }
 
     // renders sidebar for desktops
     renderSideBar = ()=>{
-        return(
-            <ul className={`desktop-menu-items hidden-mobile`}>
-                <li><Link to='/home'>Home</Link></li>
+        return (
+          <ul key="sidebar" className={`desktop-menu-items hidden-mobile`}>
+            <li>
+              <Link to="/home">Home</Link>
+            </li>
 
-                <li onClick={this.groupClicked}>
-                    Groups
-                        <Group />
-                </li>
+            <li onClick={this.groupClicked}>
+             Groups
+            </li>
+            <Group show={this.state.group} />
 
-                <li><Link to="/make-group">Create a group</Link></li>
-            </ul>
+            <li>
+              <Link to="/make-group">Create a group</Link>
+            </li>
+          </ul>
         );
     }
 
@@ -107,7 +121,7 @@ class Menu extends React.Component{
                     {/* search bar */}
                     <Search />
                     {/* burger menu */}
-                    <FontAwesomeIcon icon={faBars} onClick={this.burgerClicked}/>
+                    <FontAwesomeIcon className="burger-menu" icon={faBars} onClick={this.burgerClicked}/>
 
                 </div>
                 

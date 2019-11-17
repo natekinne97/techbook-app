@@ -3,7 +3,9 @@ import Posts from '../Posts/Posts';
 // components
 import CreatePost from '../CreatePost/CreatePost';
 import SearchResults from '../SearchResults/SearchResults';
-
+// private route
+import PrivateRoute from '../../routes/private';
+import './PostFeed.css'
 
 import PostContext from '../../Context/Context';
 // this class houses the post feed as well as the container for
@@ -14,23 +16,20 @@ import PostContext from '../../Context/Context';
 class PostFeed extends React.Component{
     static contextType = PostContext;
     
-   
-
-
     render(){
         return(
-            <React.Fragment>
+            <div className="post-feed-page">
                 {/* 
                     Create post will take parameters 
                     to tell the server where the post is going. i.e the
                     id of the group or user. 
                 */}
                 {this.context.search
-                ? <SearchResults />
+                ? <PrivateRoute path="/home" component={SearchResults}/>
                 : null}
                 <CreatePost />
                 <Posts/>
-            </React.Fragment>
+            </div>
         );
     }
 }

@@ -1,0 +1,10 @@
+
+
+@media screen and (min-width: 1024px){
+    .post-feed-page{
+        width: 25em;
+        display: block;
+        margin: 0 auto;
+    }
+
+}
