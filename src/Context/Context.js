@@ -3,21 +3,24 @@ import React from 'react'
 const PostContext = React.createContext({
     // data
     posts: [],
-    comments: [],
     isLoading: true,
     error: null,
     searching: null,
     groups: [],
     people: [],
     user: null,
+    userGroups: [],
 
     // set data
     setPosts: ()=>{},
-    setComments: ()=>{},
     setPeople: ()=>{},
     setGroups: ()=>{},
     setUser: ()=>{},
     clearUser: ()=>{},
+
+    setUserGroups: ()=>{},
+    addUserGroups: ()=>{},
+    leaveGroup: ()=>{},
 
     // add data
     addComment: ()=>{},
@@ -41,7 +44,7 @@ export default PostContext;
 export class PostProvider extends React.Component{
     state={
         posts: [],
-        comments: [],
+        userGroups: [],
         isLoading: true,
         searching: null,
         groups: [],
@@ -67,22 +70,30 @@ export class PostProvider extends React.Component{
         ])
     }
 
-    // set comments from server
-    setComments = (comments, isLoading) => {
-        
+    // initial load of users
+    setUserGroups = groups =>{
         this.setState({
-            comments: comments,
-            isLoading: isLoading
-        })
+            userGroups: groups
+        });
     }
-
-    // add comments
-    addComments = comment =>{
-        this.setComments([
-            ...this.state.comments,
-            comment
+    // add a group user just joined
+    addUserGroups = group =>{
+        this.setUserGroups([
+            group,
+            ...this.state.userGroups
         ])
     }
+
+    // leave group
+    leaveGroup = id =>{
+        const removed = this.state.userGroups.filter(group=>{
+            return group.id !== id;
+        })
+        this.setState({
+            userGroups: removed
+        })
+    }
+  
     // set groups to be displayed as a search result
     setGroups = group =>{
         this.setState({
@@ -153,20 +164,23 @@ export class PostProvider extends React.Component{
         const value = {
             // data
             posts: this.state.posts,
-            comments: this.state.comments,
+            userGroups: this.state.userGroups,
             error: this.state.error,
             search: this.state.searching,
             people: this.state.people,
             groups: this.state.groups,
             // set data
             setPosts: this.setPosts,
-            setComments: this.setComments,
 
             // add the data. from added posts/comments
             addPost: this.addPost,
-            addComment: this.addComments,
+
             setPeople: this.setPeople,
             setGroups: this.setGroups,
+
+            setUserGroups: this.setUserGroups,
+            addUserGroups: this.addUserGroups,
+            leaveGroup: this.leaveGroup,
 
             // search handling
             setSearch: this.setSearch,
