@@ -8,7 +8,7 @@ import Menu from './Menu';
 
 import Search from '../Search/Search';
 
-describe.only('Menu component', ()=>{
+describe('Menu component', ()=>{
     
     it('renders without crashing', () => {
         const wrapper = mount(
@@ -16,6 +16,8 @@ describe.only('Menu component', ()=>{
             <Route path="/" render={() => <Menu />} />
           </MemoryRouter>
         );
+
+        
         
         expect(wrapper.find(<li></li>));
         expect(wrapper.find(Search)).toHaveLength(1);

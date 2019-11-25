@@ -89,14 +89,17 @@ class CreateAccount extends React.Component {
                     <input type="text" name="last_name"/>
                    
                     {this.state.error
-                    ? <p>{this.state.match}</p>
+                    ? <p aria-label="error" id="error">{this.state.match}</p>
                     : null}
 
                     <label htmlFor="password">Password</label>
-                    <input id="password" type="password" name="password" required/>
+                    <input id="password" type="password" name="password" aria-label="password" required/>
 
                     <label htmlFor="repeat-password">Repeat password</label>
-                    <input id="repeat-password" type="password" name="repeat_password" onChange={this.repeatOnChange} required/>
+                    <input id="repeat-password" type="password" 
+                    name="repeat_password" onChange={this.repeatOnChange}
+                    aria-label="repeat-password"
+                    required/>
 
                     <button type="submit">Sign Up</button>
 
