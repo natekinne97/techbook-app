@@ -13,6 +13,8 @@ class CreateAccount extends React.Component {
         match: '',
         error: false
     }
+
+
     // check passwords match
     repeatOnChange = () =>{
         const og = document.getElementById('password').value;
@@ -43,6 +45,10 @@ class CreateAccount extends React.Component {
             password: repeat_password.value,
             full_name: first_name.value +' ' + last_name.value 
         }
+
+
+
+
         authApi.postUser(newUser)
             .then(res=>{
                 // reset the values
@@ -71,7 +77,7 @@ class CreateAccount extends React.Component {
                     : null}
 
                     <label htmlFor="username">Username</label>
-                    <input id="username" type="text" name="user_name" required/>
+                    <input id="username" type="text" name="user_name" onChange={this.testForSpaces} required/>
 
                     <label htmlFor="email">Email</label>
                     <input type="email" name="email" required/>

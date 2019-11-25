@@ -1,8 +1,8 @@
 import React from 'react';
 function Error(props){
-    return(<h1 className="red">
+    return(<h3 className="red">
         {props.err}
-    </h1>);
+    </h3>);
 }
 
 export default Error;

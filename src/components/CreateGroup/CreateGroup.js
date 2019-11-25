@@ -43,10 +43,19 @@ class CreateGroup extends React.Component{
            const fetchResponse = await fetch(`${Config.API_ENDPOINT}/groups/`, settings);
            const data = await fetchResponse.json();
           
-           this.setState({
-               group: data
-           });
-           this.redirectGroup();
+           console.log(data, 'data');
+          
+           if(data.error){
+               this.setState({
+                   error: data.error
+               })
+           }else{
+               this.setState({
+                   group: data,
+                   error: null
+               });
+               this.redirectGroup();
+           }
        }catch(err){
            this.setState({
                error: err
@@ -71,8 +80,13 @@ class CreateGroup extends React.Component{
             about: about.value,
             exp_lvl: level.value
         }
-
-        this.insertGroup(newGroup);
+        console.log(this.state.error, 'state');
+        if(!this.state.error){
+            console.log('no error');
+            this.insertGroup(newGroup);
+        }else{
+            console.log('error');
+        }
         
     }
 

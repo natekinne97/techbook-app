@@ -23,6 +23,7 @@ class Comments extends React.Component{
         comments: []
     }
 
+ 
     // ascync comment insert
     insertComment = async newComment => {
 
@@ -75,6 +76,12 @@ class Comments extends React.Component{
 
     }
 
+    // converts the date to the local date
+    fixDate = date => {
+        let newDate = new Date(date);
+        return newDate.toLocaleDateString('en-US');
+    }
+
     // render all comments
     renderComments = ()=>{
         if(this.state.comments){
@@ -82,10 +89,12 @@ class Comments extends React.Component{
               <>
                 {this.state.comments.map(comment => (
                   <div key={comment.id} className="comment">
-                    <p className="commenter">
+                    <div className="commenter">
                         <Link to={`/account/${comment.user_id}`}>
                             {comment.user}
-                        </Link></p>
+                        </Link>
+                            <p className="date"><i>{this.fixDate(comment.date_created)}</i></p>
+                    </div>
                     <p className="comment-text">{comment.comment}</p>
                   </div>
                 ))}

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
-
+import './CreateComment.css';
 
 import Error from '../Error/Error';
 
@@ -42,7 +42,7 @@ class CreateComment extends React.Component{
                 <input type="text" name="comment" required/>
 
                 <button>
-                    <FontAwesomeIcon icon={faArrowRight}/>
+                    <FontAwesomeIcon className="add-comment" icon={faArrowRight}/>
                 </button>
             </form>
         );
