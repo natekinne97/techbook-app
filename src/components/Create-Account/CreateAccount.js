@@ -29,7 +29,7 @@ class CreateAccount extends React.Component {
             })
         }else{
             this.setState({
-                math: '',
+                match: '',
                 error: false
             })
         }

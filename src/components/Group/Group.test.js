@@ -11,9 +11,9 @@ describe('Group component', ()=>{
             <Route path="/" render={() => <Group />} />
           </MemoryRouter>
         );
-        console.log(wrapper, 'wrapper');
+       
 
         expect(wrapper);
-        // expect(wrapper.find(<ul></ul>)).toHaveLength(1);
+        
     });
 });
