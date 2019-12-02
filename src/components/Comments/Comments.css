@@ -13,11 +13,16 @@
 }
 
 .commenter{
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 .comment-text{
     margin-top: 0;
-    font-size: 1.6em;
-    
+    font-size: 1.2em;
 }
+
+.date{
+    margin: 0;
+    font-size: .8em;
+}
+

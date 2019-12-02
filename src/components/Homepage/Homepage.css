@@ -40,7 +40,7 @@
         justify-content: center;
         margin: 0 auto;
         margin-top: 5em;
-        width: 49em;
+        
     }
 
     .intro{
@@ -48,7 +48,7 @@
         border-right: 1px solid black;
         width: 20em;
         padding: 1em;
-        font-size: 1.4em;
+        font-size: 1.1em;
     }
 
     .login-container{

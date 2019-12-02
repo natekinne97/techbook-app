@@ -45,6 +45,13 @@ class GroupsPage extends React.Component{
             joined: data,
             user: 'joined group'
         })
+        console.log(this.state.group.id, 'group being joined');
+        const addedGroup = {
+            id: this.state.group.id,
+            group_name: this.state.group.name
+        }
+        
+        this.context.addUserGroups(addedGroup);
        
     }
 
@@ -62,7 +69,7 @@ class GroupsPage extends React.Component{
         
         
         if(fetchResponse.status === 200){
-           
+            this.context.leaveGroup(this.state.group.id);
             this.setState({
                 user: null
             })

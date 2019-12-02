@@ -24,6 +24,7 @@ class Account extends React.Component {
     match: { params: {} },
     prev: ""
   };
+  
 
   state = {
     accountInfo: [],
@@ -148,7 +149,7 @@ class Account extends React.Component {
   }
 
   renderAccountInfo() {
-      console.log(this.state.friendStatus);
+     
     return (
       <div className="basic">
         <div className="edit-button">
