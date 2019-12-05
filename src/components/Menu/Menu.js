@@ -24,7 +24,7 @@ class Menu extends React.Component{
     // handles logout
     handleLogoutClick = () => {
         this.context.clearState();
-        TokenService.clearAuthToken()
+        TokenService.clearAuthToken();
         /* when logging out, clear the callbacks to the refresh api and idle auto logout */
         TokenService.clearCallbackBeforeExpiry()
         IdleService.unRegisterIdleResets()
@@ -93,14 +93,7 @@ class Menu extends React.Component{
     renderSideBar = ()=>{
         return (
           <ul key="sidebar" className={`desktop-menu-items hidden-mobile`}>
-            <li>
-              <Link to="/home">Home</Link>
-            </li>
-
-            <li onClick={this.groupClicked}>
-             Groups
-            </li>
-            <Group show={this.state.group} />
+            <Group show="" />
 
             <li>
               <Link to="/make-group">Create a group</Link>

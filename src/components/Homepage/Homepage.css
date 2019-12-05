@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     border: 1px solid black;
+    /* background: url('https://i.imgur.com/Zw3wGN1.jpg'); */
+
 }
 
 .intro{
@@ -11,6 +13,9 @@
     font-weight: 500;
     font-size: .9em;
     padding: .2em;
+    /* color: white; */
+    /* background: rgb(0, 0, 0, 0.6); */
+   
 }
 
 .login-container{
@@ -18,6 +23,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* color: white; */
+    /* background: rgb(0, 0, 0, 0.6); */
+}
+
+.forgot-link{
+    color: blueviolet;
+    text-decoration: underline;
+
 }
 
 #signup{
@@ -39,8 +52,8 @@
         align-items: center;
         justify-content: center;
         margin: 0 auto;
-        margin-top: 5em;
-        
+        /* margin-top: 5em; */
+        height: 92vh;
     }
 
     .intro{
@@ -49,11 +62,15 @@
         width: 20em;
         padding: 1em;
         font-size: 1.1em;
+        height: 100%;
+        width: 70%;
     }
 
     .login-container{
         font-size: 1.5em;
         width: 20em;
+
+        height: 100%;
     }
 
 }
