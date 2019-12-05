@@ -2,7 +2,7 @@ import React from 'react';
 
 import Config from '../../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faThumbsUp, faThumbsDown} from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp, faThumbsDown, faArrowDown} from '@fortawesome/free-solid-svg-icons'
 import {Link} from 'react-router-dom';
 import PostContext from '../../Context/Context';
 import Error from '../Error/Error';
@@ -62,7 +62,7 @@ class Posts extends React.Component{
 
         },
         currentParam: 0,
-        addBar: ''
+        addBar: '',
     }
 
 
@@ -74,12 +74,14 @@ class Posts extends React.Component{
                 vote: 1,
                 post_id: id
             }
+            
             this.vote(newVote);
         }else if(position === 'down'){
             const newVote = {
                 vote: -1,
                 post_id: id
             }
+            
             this.vote(newVote);
         }else{
             console.log('Must be a string up or down')
@@ -161,9 +163,20 @@ class Posts extends React.Component{
                         </div>
                         <div className={`rating ${this.state.addBar}`}>
 
-                            <FontAwesomeIcon icon={faThumbsUp} value='1' onClick={e => this.upVote('up', post.id)} />
-                            <FontAwesomeIcon icon={faThumbsDown} value='-1' onClick={e => this.upVote('down', post.id)} />
-                            <p onClick={e => this.commentsClicked(post.id)}>Comments</p>
+                            <FontAwesomeIcon 
+                                className={`rating-btn `} 
+                                icon={faThumbsUp} value='1' 
+                                onClick={e => this.upVote('up', post.id)} 
+                            />
+                            <FontAwesomeIcon 
+                                className={`rating-btn `} 
+                                icon={faThumbsDown} value='-1' 
+                                onClick={e => this.upVote('down', post.id)} 
+                            />
+                            <p className="rating-btn" 
+                            onClick={e => this.commentsClicked(post.id)}>
+                                <FontAwesomeIcon icon={faArrowDown}/> Comment 
+                                </p>
 
                         </div>
                         {/* for showing comments */}

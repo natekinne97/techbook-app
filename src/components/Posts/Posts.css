@@ -57,6 +57,16 @@
     height: 6vh;
     
 }
+
+.rating-btn:hover{
+    color: blue;
+    cursor: pointer;
+}
+
+.blue{
+    color: darkturquoise;
+}
+
 /* only show bar if comments is clicked */
 .show-bar{
     border-bottom: 1px solid black;

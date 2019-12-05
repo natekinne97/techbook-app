@@ -51,7 +51,7 @@ class Homepage extends React.Component{
                 <div className="login-container">
                     <h3>Login</h3>
                     <Login onLoginSuccess={this.handleLoginSuccess}/>
-                    <Link to="/forgot-password">
+                    <Link className="forgot-link" to="/forgot-password">
                         Forgot password?
                     </Link>
                     <Link id="signup" to="/signup">

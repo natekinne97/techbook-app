@@ -9,11 +9,9 @@ top menu includes search bar and header TB
 
     border-bottom: 2px solid rgb(222, 184, 135, .4);
     margin-bottom: 1em;
-    padding-bottom: .5em;
     
     /* prevent the content from touching the sides */
-    padding-right: .3em;
-    padding-left: .3em;
+    padding: .5em;
 
     background: rgb(222, 184, 135, 0.7);
 }
@@ -86,6 +84,10 @@ top menu includes search bar and header TB
 }
 
 @media screen and (min-width: 1024px){
+    /* remove the margin from the top of the menu */
+    .top-menu{
+        margin: 0;
+    }
     /* change the menu style so it can be used for desktops */
     .mobile-menu-items{
         width: 4em;
@@ -102,7 +104,7 @@ top menu includes search bar and header TB
         border: none;
         margin-right: 2em;
         width: 4em;
-        font-size: 4vh;
+        font-size: 3vh;
         border-bottom: 1px solid;
     }
 
@@ -113,11 +115,11 @@ top menu includes search bar and header TB
         padding: 0;
         display: flex;
         flex-direction: column;
-        border-right: 1px solid black;
+       
         height: 100%;
         padding-right: .2em;
         width: 28vh;
-        font-size: 4vh;
+        font-size: 3vh;
        
     }
 
@@ -130,7 +132,7 @@ top menu includes search bar and header TB
     .desktop-menu-items li{
         margin-bottom: .5em;
         list-style: none;
-        border-bottom: 1px solid black;
+        
         width: 100%;
     }
     
