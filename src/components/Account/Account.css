@@ -3,7 +3,10 @@
     display: block;
     margin: 0 auto;
     width: 22em;
-    border: 1px solid black;
+    padding-bottom: 1em;
+    color: white;
+    height: initial;
+    height: 100vh;
 }
 
 .basic h4{
@@ -14,6 +17,11 @@
 .basic{
     font-size: 1.5em;
 }
+
+.edit-btn{
+    color: wheat;
+}
+
 .edit-button{
     display: flex;
     justify-content: flex-end;

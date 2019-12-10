@@ -12,8 +12,8 @@ top menu includes search bar and header TB
     
     /* prevent the content from touching the sides */
     padding: .5em;
-
-    background: rgb(222, 184, 135, 0.7);
+    background: #83AAEC;
+    /* background: rgb(222, 184, 135, 0.7); */
 }
 
 /* the link to home and logo */
@@ -59,6 +59,7 @@ top menu includes search bar and header TB
     text-decoration: none;
     color: black;
     width: 100%;
+    color: white;
 }
 
 /* a seperate menu for the desktop with more features easily displayed */
@@ -115,7 +116,7 @@ top menu includes search bar and header TB
         padding: 0;
         display: flex;
         flex-direction: column;
-       
+        color: white;
         height: 100%;
         padding-right: .2em;
         width: 28vh;
@@ -134,6 +135,10 @@ top menu includes search bar and header TB
         list-style: none;
         
         width: 100%;
+    }
+
+    .desktop-menu-items li a{
+        color: white;
     }
     
     .desktop-menu-items li:nth-child(2){

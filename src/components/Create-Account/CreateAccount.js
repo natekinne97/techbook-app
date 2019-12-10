@@ -86,7 +86,7 @@ class CreateAccount extends React.Component {
                     <input type="text" name="first_name" required/>
 
                     <label htmlFor="last_name">Last name</label>
-                    <input type="text" name="last_name"/>
+                    <input type="text" name="last_name" required/>
                    
                     {this.state.error
                     ? <p aria-label="error" id="error">{this.state.match}</p>

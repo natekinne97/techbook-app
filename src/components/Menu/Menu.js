@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Route} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import TokenService from '../../services/token-services';
@@ -102,6 +102,20 @@ class Menu extends React.Component{
         );
     }
 
+    renderSearchBar(){
+      return(
+        <>
+          {['/home'].map((path, index)=>(
+            <Route
+              key={index**4}
+              path={path}
+              component={Search}
+            />
+          ))}
+        </>
+      );
+    }
+
 
     render(){
         return(
@@ -112,7 +126,7 @@ class Menu extends React.Component{
                         {/* <Link>TechBook</Link> */}
                     </header>
                     {/* search bar */}
-                    <Search />
+                    {this.renderSearchBar()}
                     {/* burger menu */}
                     <FontAwesomeIcon className="burger-menu" icon={faBars} onClick={this.burgerClicked}/>
 

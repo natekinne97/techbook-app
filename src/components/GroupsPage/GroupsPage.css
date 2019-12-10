@@ -4,12 +4,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
+}
+
+.welcome{
+    color: white;
 }
 
 .about-container{
     border: 1px solid black;
     width: 20em;
     margin-bottom: 1em;
+    color: white;
 }
 
 .about-container button{

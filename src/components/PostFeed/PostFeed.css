@@ -5,6 +5,7 @@
         width: 25em;
         display: block;
         margin: 0 auto;
+        min-height: 92vh;
     }
 
 }

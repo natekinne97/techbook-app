@@ -11,7 +11,8 @@
 
 
 .search-results a{
-    text-decoration: none;
+    color: aquamarine;
+    text-decoration: underline;
 }
 
 /* search results and x */

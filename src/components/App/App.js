@@ -96,13 +96,28 @@ class App extends React.Component {
     this.forceUpdate()
   }
 
+  renderMenu(){
+    return (
+      <>
+        {['/home', '/account/:id', '/account', '/make-group', 
+        '/group/:id', '/edit-profile'].map((path, index)=>(
+          <Route
+            key={index}
+            path={path}
+            component={Menu}
+          />
+        ))}
+      </>
+    );
+  }
+
   render() {
     localStorage.lastUrl = window.location.pathname;
     return (
       <div>
         <nav>
          {/* menu goes here */}
-         <Menu/>
+         {this.renderMenu()}
         </nav>
         <main>
       

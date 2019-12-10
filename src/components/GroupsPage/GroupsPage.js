@@ -202,7 +202,7 @@ class GroupsPage extends React.Component{
        
         if(this.state.group.name){
             return (
-                <h1>{this.state.group.name}</h1>
+                <h1 className="welcome">{this.state.group.name}</h1>
             );
         }else{
             return(
@@ -239,7 +239,7 @@ class GroupsPage extends React.Component{
     renderWelcome(){
         if(this.state.joined.length > 0){
             return (
-                <h4>Welcome to the group.</h4>
+                <h4 className="welcome">Welcome to the group.</h4>
             );
         }
     }

@@ -148,6 +148,51 @@ class Account extends React.Component {
     }
   }
 
+
+  // only render the info its either the users or if there is data to render
+  renderBioInfo(){
+    if(this.state.accountInfo.bio){
+      return (
+        <>
+          <h4>Bio</h4>
+          <p>{this.state.accountInfo.bio}</p>
+        </>
+      );
+      // its the current users account
+    }else if(!this.props.match.params.id && !this.state.accountInfo.bio){
+      return(
+        <>
+          <h4>Bio</h4>
+          <p>Add a bio</p>
+        </>
+      )
+    }else{
+      return null;
+    }
+  }
+  
+  renderOccupationInfo(){
+    // render if there is info
+    if(this.state.accountInfo.occupation){
+      return(
+        <>
+          <h3>Occupation</h3>
+          <p>{this.state.accountInfo.occupation}</p>
+        </>
+      );
+      // render only if its the current users
+    } else if (!this.props.match.params.id && !this.state.accountInfo.bio){
+      return(
+        <>
+          <h3>Occupation</h3>
+          <p>Add Occupation</p>
+        </>
+      );
+    }else{
+      return null;
+    }
+  }
+
   renderAccountInfo() {
      
     return (
@@ -156,7 +201,7 @@ class Account extends React.Component {
           {/* check if user owns the account */}
           {!this.props.match.params.id ? (
             <Link to="/edit-profile">
-              <FontAwesomeIcon icon={faPencilAlt} />
+              <FontAwesomeIcon className="edit-btn" icon={faPencilAlt} />
             </Link>
           ) : null}
           {/* if they dont own the account check
@@ -171,21 +216,10 @@ class Account extends React.Component {
         <h4>Full name</h4>
         <p>{this.state.accountInfo.full_name}</p>
 
-        <h4>Bio</h4>
+       {this.renderBioInfo()}
 
-        {!this.state.accountInfo.bio ? (
-          <p>Add a bio</p>
-        ) : (
-          this.state.accountInfo.bio
-        )}
+        {this.renderOccupationInfo()}
 
-        <h3>Occupation</h3>
-
-        {!this.state.accountInfo.occupation ? (
-          <p>Add a bio</p>
-        ) : (
-          this.state.accountInfo.occupation
-        )}
       </div>
     );
   }
