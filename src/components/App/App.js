@@ -103,6 +103,7 @@ class App extends React.Component {
         '/group/:id', '/edit-profile'].map((path, index)=>(
           <Route
             key={index}
+            exact
             path={path}
             component={Menu}
           />

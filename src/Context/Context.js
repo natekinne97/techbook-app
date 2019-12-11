@@ -64,10 +64,14 @@ export class PostProvider extends React.Component{
 
     // add posts when added and refreshed
     addPost = post => {
-        this.setPosts([
-            post,
-            ...this.state.posts
-        ])
+        if(!this.state.posts){
+            this.setPosts(post);
+        }else{  
+            this.setPosts([
+                post,
+                ...this.state.posts
+            ])
+        }
     }
 
     // initial load of users
@@ -78,10 +82,14 @@ export class PostProvider extends React.Component{
     }
     // add a group user just joined
     addUserGroups = group =>{
-        this.setUserGroups([
-            group,
-            ...this.state.userGroups
-        ])
+        if(!this.state.groups){
+            this.setGroups(group);
+        }else{
+            this.setUserGroups([
+                group,
+                ...this.state.userGroups
+            ])
+        }
     }
 
     // leave group

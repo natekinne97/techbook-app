@@ -31,7 +31,7 @@ class Search extends React.Component{
             const fetchResponse = await fetch(`${Config.API_ENDPOINT}/search/`, settings);
             const data = await fetchResponse.json();
            
-            console.log(data.error);
+          
             if(data.error){
                 this.context.setError(data.error);
             }else{

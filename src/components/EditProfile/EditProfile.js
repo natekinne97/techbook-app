@@ -23,12 +23,7 @@ class EditProfile extends React.Component{
 
     redirect = () => {
         const { history } = this.props
-        // check if last loaded page was login
-        if (localStorage.lastUrl === '/login') {
-            history.push('/account')
-        } else {
-            history.push(localStorage.lastUrl);
-        }
+        history.push('/account');
     }
 
     // get the information for population
@@ -96,10 +91,10 @@ class EditProfile extends React.Component{
                 ? <Error err={this.state.error}/>
                 : null}
                 <label htmlFor="user_name">Username:</label>
-                <input type="text" name="user_name" value={this.state.accountInfo.user_name} required/>
+                <input type="text" name="user_name" placeholder={this.state.accountInfo.user_name} required/>
                 
                 <label htmlFor="full_name">Full name</label>
-                <input type="text" name="full_name" value={this.state.accountInfo.full_name}/>
+                <input type="text" name="full_name" placeholder={this.state.accountInfo.full_name} required/>
 
                 <label htmlFor="bio">Bio</label>
                 <textarea name="bio" required>

@@ -101,7 +101,7 @@ class CreateAccount extends React.Component {
                     aria-label="repeat-password"
                     required/>
 
-                    <button type="submit">Sign Up</button>
+                    <button className="form-btn" type="submit">Sign Up</button>
 
 	        	</form>
             </div>

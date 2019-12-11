@@ -8,8 +8,7 @@ top menu includes search bar and header TB
     align-items: center;
 
     border-bottom: 2px solid rgb(222, 184, 135, .4);
-    margin-bottom: 1em;
-    
+
     /* prevent the content from touching the sides */
     padding: .5em;
     background: #83AAEC;
@@ -49,7 +48,7 @@ top menu includes search bar and header TB
     margin-bottom: 2%;
     border-radius: 3%;
     width: 100%;
-    background: rgb(0, 0, 0, 0.1);
+    background: rgb(0, 0, 0, 0.2);
     box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 
     0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
 }
@@ -60,6 +59,11 @@ top menu includes search bar and header TB
     color: black;
     width: 100%;
     color: white;
+}
+/* this is for the groups display */
+#groups-head{
+    color: white;
+    cursor: pointer;
 }
 
 /* a seperate menu for the desktop with more features easily displayed */
@@ -118,7 +122,7 @@ top menu includes search bar and header TB
         flex-direction: column;
         color: white;
         height: 100%;
-        padding-right: .2em;
+        padding-left: .2em;
         width: 28vh;
         font-size: 3vh;
        

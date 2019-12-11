@@ -72,7 +72,7 @@ class Menu extends React.Component{
                 Home
               </Link>
             </li>
-            <li className="hidden-desktop" onClick={this.groupClicked}>
+            <li id="groups-head" className="hidden-desktop" onClick={this.groupClicked}>
               Groups
             </li>
             <Group show={`hidden-desktop ${this.state.group}`} />

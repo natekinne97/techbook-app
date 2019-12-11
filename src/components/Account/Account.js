@@ -5,7 +5,7 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import {Link} from 'react-router-dom';
 import TokenService from '../../services/token-services';
 import Config from '../../config';
-
+import Friends from '../Friends/Friends';
 import './Account.css';
 
 // next we need to make a route to check the user
@@ -41,7 +41,7 @@ class Account extends React.Component {
         authorization: `bearer ${TokenService.getAuthToken()}`
       }
     };
-
+    
     const url = `${Config.API_ENDPOINT}/friends/${this.props.match.params.id}`;
 
     const fetchResponse = await fetch(url, settings);
@@ -131,12 +131,15 @@ class Account extends React.Component {
       }
     };
 
-    const fetchResponse = await fetch(url, settings);
-    const data = await fetchResponse.json();
+    if(this.props.match.params.id){
+      const fetchResponse = await fetch(url, settings);
+      const data = await fetchResponse.json();
 
-    this.setState({
-      friendStatus: data
-    });
+      this.setState({
+        friendStatus: data
+      });
+    }
+    
   };
 
   componentDidMount() {
@@ -145,6 +148,15 @@ class Account extends React.Component {
     // params
     if (this.props.match.params.id) {
       this.checkFriendStatus();
+    }
+  }
+
+  componentDidUpdate(nextProps){
+    if(nextProps.match.params.id !== this.props.match.params.id){
+      this.fetchUserProfile();
+      if(nextProps.match.params.id){
+        this.checkFriendStatus();
+      }
     }
   }
 
@@ -225,7 +237,12 @@ class Account extends React.Component {
   }
 
   render() {
-    return <div className="account">{this.renderAccountInfo()}</div>;
+    return <div className="account">
+      {this.renderAccountInfo()}
+      {/* wrapped in a route to use  */}
+        <Friends id={this.props.match.params.id ? this.props.match.params.id : null} />
+       
+      </div>;
   }
 }
 

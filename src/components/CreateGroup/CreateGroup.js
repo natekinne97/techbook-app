@@ -43,8 +43,6 @@ class CreateGroup extends React.Component{
            const fetchResponse = await fetch(`${Config.API_ENDPOINT}/groups/`, settings);
            const data = await fetchResponse.json();
           
-           console.log(data, 'data');
-          
            if(data.error){
                this.setState({
                    error: data.error
@@ -80,9 +78,9 @@ class CreateGroup extends React.Component{
             about: about.value,
             exp_lvl: level.value
         }
-        console.log(this.state.error, 'state');
+        // check for errors
         if(!this.state.error){
-            console.log('no error');
+            // only add to db if no error
             this.insertGroup(newGroup);
         }else{
             console.log('error');

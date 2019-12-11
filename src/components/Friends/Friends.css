@@ -1,0 +1,33 @@
+.friend-container{
+    display: flex;
+    flex-direction: column;
+    text-align: initial;
+}
+
+.friend-border{
+    border: 4px solid cornflowerblue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 2em;
+    align-content: center;
+    flex-wrap: wrap;
+    min-height: 5em;
+    max-width: 22em;
+}
+
+.friend{
+    border: 1px solid black;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20vh;
+    background: cornflowerblue;
+    /* background: #83AAEC; */
+}
+
+.friend a{
+    color: white;
+    text-decoration: underline;
+}

@@ -29,6 +29,25 @@ class Posts extends React.Component{
         match: { params: {} },
     }
 
+    patchVote = async vote =>{
+        const settings = {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+            body: JSON.stringify(vote)
+        }
+        const fetchResponse = await fetch(`${Config.API_ENDPOINT}/votes/`, settings);
+        const data = await fetchResponse.json();
+        // if the sum increased then add it to the posts and refresh
+        if (data[0].sum) {
+            let post = this.context.posts.find(post => post.id === vote.post_id);
+            post.sum = data[0].sum;
+            this.context.setPosts(this.context.posts);
+        }
+    }
+
     // handle votes.
     vote = async vote => {
         const settings = {
@@ -43,6 +62,11 @@ class Posts extends React.Component{
         try {
             const fetchResponse = await fetch(`${Config.API_ENDPOINT}/votes/`, settings);
             const data = await fetchResponse.json();
+            
+            if (data.message) {
+                this.patchVote(vote);
+                return 0;
+            }
             // if the sum increased then add it to the posts and refresh
             if(data[0].sum){
                 let post = this.context.posts.find(post => post.id === vote.post_id);
@@ -141,7 +165,7 @@ class Posts extends React.Component{
 
 
     testRenderPost = ()=>{
-        
+      
         return (
             <>
                 {this.context.posts.map((post, index) => (

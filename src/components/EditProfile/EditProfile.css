@@ -3,14 +3,19 @@
     flex-direction: column;
     justify-content: baseline;
     align-items: center;
-    border: 1px solid black;
-    width: 20em;
 }
 
+.account-edit label{
+    margin-top: .2em;
+}
+
+.account-edit button{
+    margin-top: .4em;
+}
 .edit-account-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;    
-
+    color: white;
 }
